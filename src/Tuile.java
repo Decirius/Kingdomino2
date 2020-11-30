@@ -1,7 +1,7 @@
 
 public class Tuile {
 
-    final static String [] decod_terrain = {"champ","pré","lac","marais","forêt","mine"};
+    final static String [] decod_terrain = {"champ","pre","lac","marais","foret","mine"};
 
     final private int[] terrain1;
     final private int[] terrain2;
