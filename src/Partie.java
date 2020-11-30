@@ -60,6 +60,7 @@ public class Partie {
     public Partie(String j1, String j2){
         this.j1 = new Joueur(j1);
         this.j2 = new Joueur((j2));
+        melangerPile();
         this.tirage = new Tuile[4];
     }
 

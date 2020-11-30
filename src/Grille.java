@@ -14,6 +14,7 @@ public class Grille {
         int[] init = {-1, -1};
         this.contenu[3][3] = init;
     }
+    
     public int[] getCase(Coord coord) {
         return this.contenu[coord.getLigne()][coord.getColonne()];
     }
@@ -27,7 +28,7 @@ public class Grille {
         return Case == null;
     }
 
-    //entree correspond à un terrain d'une tuile
+    //entree correspond a un terrain d'une tuile
     public void setCase(Coord c,int[] entree){
         this.contenu[c.getLigne()][c.getColonne()] = entree;
     }
