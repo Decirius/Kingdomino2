@@ -32,14 +32,17 @@ public class Grille {
     public void setCase(Coord c,int[] entree){
         this.contenu[c.getLigne()][c.getColonne()] = entree;
     }
-
+    //vérifie que la case est libre et qu'une des cases autour a le même type de terrain
     public boolean verifieValidite(Coord coord, int[] terrain) {
+        //verfie que la case est libre
         if(!this.estLibre(coord)){
             return false;
         }
+        //recupere les terrains autour
         Coord [] cases = this.getCasesAutour(coord);
         int[] centre = new int[] {-1,-1};
         for (int i = 0; i < cases.length; i++) {
+            //compare les terrains autour (que sont occupés et que le terrain est identique)
             if(this.getCase(cases[i]) != null && (this.getCase(cases[i])[0] == terrain[0] || Arrays.equals(this.getCase(cases[i]), centre))) {
                 return true;
             }
@@ -74,6 +77,7 @@ public class Grille {
         }
     }
 
+    //retourne false et ne fait rien si c'est impossible de placer la tuile sur les coordonnées données
     public boolean recevoirTuile(Tuile tuile, Coord coord1, Coord coord2) {
         int orientation = tuile.getOrientation();
         if(orientation == 0 || orientation == 1){

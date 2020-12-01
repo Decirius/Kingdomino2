@@ -73,6 +73,7 @@ public class Partie {
 
     public void faireTirage() {
         this.tirage = Arrays.copyOfRange(this.pile, 0, 4);
+        Arrays.sort(this.tirage);
         this.pile = Arrays.copyOfRange(this.pile, 4, this.pile.length);
     }
 
