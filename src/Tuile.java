@@ -1,5 +1,5 @@
 
-public class Tuile {
+public class Tuile implements Comparable {
 
     final static String [] decod_terrain = {"champ","pré","lac","marais","forêt","mine"};
 
@@ -32,5 +32,14 @@ public class Tuile {
 
     public void setOrientation(int orientation) {
         this.orientation = orientation;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Tuile){
+            Tuile t = (Tuile) o;
+            return this.id_tuile - t.id_tuile;
+        }
+       throw (new IllegalArgumentException() );
     }
 }
