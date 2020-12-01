@@ -56,6 +56,7 @@ public class Partie {
     private Joueur j1;
     private Joueur j2;
     private Tuile[] tirage;
+    
 
     public Partie(String j1, String j2){
         this.j1 = new Joueur(j1);
