@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Fenetre_main extends JFrame implements ActionListener {
+public class FenetreMain extends JFrame implements ActionListener {
 
 	
 	/**
@@ -19,11 +19,11 @@ public class Fenetre_main extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	
-	JButton bouton_nouveau = new JButton("Nouvelle Partie");
-	JButton bouton_charger = new JButton("Charger une Partie");	
-	JButton bouton_quitter = new JButton("Quitter");
+	JButton boutonNouveau = new JButton("Nouvelle Partie");
+	JButton boutonCharger = new JButton("Charger une Partie");	
+	JButton boutonQuitter = new JButton("Quitter");
 	
-	public Fenetre_main() {
+	public FenetreMain() {
 		
 		// Création de la fenetre
 		setTitle("Kingdomino");
@@ -40,30 +40,30 @@ public class Fenetre_main extends JFrame implements ActionListener {
 		// Initialisation des panels pour organiser la page
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2,1));
-		JPanel panel_logo = new JPanel();
-		panel_logo.setLayout(new GridLayout(1,1));
-		JPanel panel_bouton = new JPanel();
-		panel_bouton.setLayout(new GridLayout(3,1));
+		JPanel panelLogo = new JPanel();
+		panelLogo.setLayout(new GridLayout(1,1));
+		JPanel panelBouton = new JPanel();
+		panelBouton.setLayout(new GridLayout(3,1));
 			
 		// Initialisation des panels
-		panel_bouton.setBackground(Color.white);
+		panelBouton.setBackground(Color.white);
 
 
 		ImageIcon imgbg=new ImageIcon("images/kingmain.png");
 		JLabel img = new JLabel(imgbg);
-		panel_logo.add(img);
+		panelLogo.add(img);
 		
-		panel_bouton.add(bouton_nouveau);
-		panel_bouton.add(bouton_charger);
-		panel_bouton.add(bouton_quitter);
+		panelBouton.add(boutonNouveau);
+		panelBouton.add(boutonCharger);
+		panelBouton.add(boutonQuitter);
 		
-		bouton_quitter.addActionListener(this);
-		bouton_nouveau.addActionListener(this);
-		bouton_charger.addActionListener(this);
+		boutonQuitter.addActionListener(this);
+		boutonNouveau.addActionListener(this);
+		boutonCharger.addActionListener(this);
 		
 		// Assemblage panels
-		panel.add(panel_logo);
-		panel.add(panel_bouton);
+		panel.add(panelLogo);
+		panel.add(panelBouton);
 		
 		return panel;
 	}
@@ -71,15 +71,15 @@ public class Fenetre_main extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(bouton_quitter)) {
+		if (e.getSource().equals(boutonQuitter)) {
 			this.dispose();
 		}
-		if (e.getSource().equals(bouton_nouveau)) {
-			Fenetre_jeu jeu = new Fenetre_jeu();
-			jeu.setVisible(true);
+		if (e.getSource().equals(boutonNouveau)) {
+			FenetreChoix choix = new FenetreChoix();
+			choix.setVisible(true);
 			this.setVisible(false);
 		}
-		if (e.getSource().equals(bouton_charger)) {
+		if (e.getSource().equals(boutonCharger)) {
 		
 		}
 		
