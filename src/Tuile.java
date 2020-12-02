@@ -2,7 +2,7 @@
 public class Tuile implements Comparable {
 
     final static String [] decod_terrain = {"champ","pre","lac","marais","foret","mine"};
-
+    //terrain[0] = type de terrain et terrain[1] = nb de courrones
     final private int[] terrain1;
     final private int[] terrain2;
     final private int id_tuile;

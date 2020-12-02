@@ -5,8 +5,8 @@ public class Coord {
 	private int colonne;
 	
 	public Coord(int x, int y) {
-		this.colonne = y;
 		this.ligne = x;
+		this.colonne = y;
 	}
 	public int getLigne() {
 		return this.ligne;
