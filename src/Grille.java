@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Arrays;
 
 public class Grille {
@@ -54,23 +55,29 @@ public class Grille {
     public Coord[] getCasesAutour(Coord cor) {
         int ligne = cor.getLigne();
         int colonne = cor.getColonne();
-        if(ligne == 0 && colonne ==0){
-            return new Coord[] {new Coord(ligne+1,colonne), new Coord(ligne,colonne+1)};
+        if (ligne == 0 && colonne == 0) {
+            return new Coord[]{new Coord(ligne + 1, colonne), new Coord(ligne, colonne + 1)};
         }
-        if(ligne == 0 && colonne == 6){
-            return new Coord[] {new Coord(ligne+1,colonne),new Coord(ligne,colonne-1)};
+        if (ligne == 0 && colonne == 6) {
+            return new Coord[]{new Coord(ligne + 1, colonne), new Coord(ligne, colonne - 1)};
         }
-        if(ligne == 0){
-            return new Coord[] {new Coord(ligne+1,colonne),new Coord(ligne,colonne+1),new Coord(ligne,colonne-1)};
+        if (ligne == 0) {
+            return new Coord[]{new Coord(ligne + 1, colonne), new Coord(ligne, colonne + 1), new Coord(ligne, colonne - 1)};
         }
-        if(ligne == 6 && colonne ==0){
-            return new Coord[] {new Coord(ligne-1,colonne),new Coord(ligne,colonne+1)};
+        if (ligne == 6 && colonne == 0) {
+            return new Coord[]{new Coord(ligne - 1, colonne), new Coord(ligne, colonne + 1)};
         }
-        if(ligne == 6 && colonne == 6){
-            return new Coord[] {new Coord(ligne-1,colonne),new Coord(ligne,colonne-1)};
+        if (ligne == 6 && colonne == 6) {
+            return new Coord[]{new Coord(ligne - 1, colonne), new Coord(ligne, colonne - 1)};
         }
-        if(ligne == 6){
-            return new Coord[] {new Coord(ligne-1,colonne),new Coord(ligne,colonne+1),new Coord(ligne,colonne-1)};
+        if (ligne == 6) {
+            return new Coord[]{new Coord(ligne - 1, colonne), new Coord(ligne, colonne + 1), new Coord(ligne, colonne - 1)};
+        }
+        if (colonne == 0) {
+            return new Coord[]{new Coord(ligne - 1, colonne), new Coord(ligne + 1, colonne ), new Coord(ligne, colonne + 1)};
+        }
+        if (colonne == 6) {
+            return new Coord[]{new Coord(ligne - 1, colonne), new Coord(ligne + 1, colonne git), new Coord(ligne, colonne - 1)};
         }
         else {
             return new Coord[] {new Coord(ligne + 1, colonne), new Coord(ligne - 1, colonne),
