@@ -56,9 +56,9 @@ public class Partie {
     private Joueur j1;
     private Joueur j2;
     private Tuile[] tirage;
-    private int tour;					// Varie de tour (J)1 � (J)2 
+    private int tour;					// Varie de tour (J)1 a (J)2 
     private int phase;					// ------------------
-    private int round; 					// Variant de 1 � 12
+    private int round; 					// Variant de 1 a 12
     private int[] tempOrdre;			// ordre pour le Round prochain
     private int[] ordreActuel;			// ordre pour le Round courant
 

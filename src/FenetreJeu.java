@@ -15,11 +15,14 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	JMenuItem quitter;
 	JMenuItem rules;
 	
+	JButton defausse;
+	
 	Partie tempPartie;
 	int tuileSelected;
 	int[] terrainSelected;
 	Coord[] coordSelected= new Coord[2];
 	int[] reserved = new int[]{0,0,0,0};
+	boolean defausseActive;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -94,8 +97,13 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				} else {
 					panelBasToken.add(constructToken(tempPartie.getTempOrdre()[i],1));
 				}
+			
 			}
 		} else {
+			defausse = new JButton("Defausser");
+			defausse.addActionListener(this);
+			panelBasToken.add(defausse);
+			
 			for (int j=0;j<2;j++) {
 				if (tempPartie.getTour()==1) {
 					if (tempPartie.getJ1().getReservation()[j]!=null) {
@@ -164,7 +172,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 								}
 		
 							} else {
-								System.out.println("Erreur : pas de terrain s�lectionn�");
+								System.out.println("Erreur : pas de terrain selectionne");
 							}
 						}
 					}
@@ -201,8 +209,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 		tuile.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				tuileSelected=indice;
+				tuileSelected=indice;			
 				verif();
+				
 				
 			}
 		});
@@ -212,14 +221,20 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			label.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					terrainSelected=new int[] {indice,1};
-					System.out.println("Terrain 1 Tuile "+indice);
+					if (defausseActive) {
+						System.out.println("on defausse");
+						defausser();
+					}
 				}
 			});
 			
 			label2.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					terrainSelected=new int[] {indice,2};
-					System.out.println("Terrain 2 Tuile "+indice);
+					if (defausseActive) {
+						System.out.println("on defausse");
+						defausser();
+					}
 				}
 			});
 		}
@@ -289,18 +304,23 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		if (e.getSource().equals(rules)) {
 			JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
 		}
+		if (e.getSource().equals(defausse)) {
+			defausseActive=true;
+			JOptionPane.showMessageDialog(null, "<html>Choisissez la tuile a defausser.</html>","Defausse", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
 	}
 	
 	public void debutTour() {
 		String text1 ;
 		String text2;
+		defausseActive=false;
 		
 		if (tempPartie.getTour() == 1) {
-			text1="<html>Joueur 1, a toi de jouer.<br><br>";
+			text1="<html>"+tempPartie.getJ1().getNom()+", a toi de jouer.<br><br>";
 		}
 		else {
-			text1="<html>Joueur 2, a toi de jouer.<br><br>";
+			text1="<html>"+tempPartie.getJ2().getNom()+", a toi de jouer.<br><br>";
 		}
 		
 		switch (tempPartie.getPhase()) {
@@ -315,7 +335,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			case 7: 
 			case 8: 
 				text2="Selectionner le terrain que vous voulez positionner, puis "
-						+ "cliquer sur la case de destination. Puis selectionner"
+						+ "cliquer sur la case de destination. <br>Puis selectionner"
 						+ "la case du second terrain de la tuile.";
 				break;
 			default :
@@ -351,47 +371,42 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		}
 
 		
-		if (tempPartie.getRound()<12) {
-			if (tempPartie.getPhase()==8) {
-				finRound();
-				
-			} else {
-				tempPartie.setPhase(tempPartie.getPhase()+1);
-			}
-			panel.removeAll();
-			setContentPane(buildContentPane());
-			debutTour(); 
-		} else {
-			panel.removeAll();
-			setContentPane(buildContentPane());
+		if (tempPartie.getPhase()==8) {
 			finRound();
+		} else {
+			tempPartie.setPhase(tempPartie.getPhase()+1);
+			panel.removeAll();
+			setContentPane(buildContentPane());
+			debutTour();
 		}
-		
 		
 	}
 	
 	
 	public void finRound() {
+		System.out.println("fin round");
 		
-		
-		if (tempPartie.getRound()<12) {
+		if (tempPartie.getRound()==12) {
 			
+			JOptionPane.showMessageDialog(null, "Partie finie","Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+			// afficher le score, clap clap bravo
+			
+		} else {
 			tempPartie.setRound(tempPartie.getRound()+1);
 			tempPartie.setPhase(1);
 			tempPartie.faireTirage();
 			tempPartie.majOrdre();
 			
-			if (tempPartie.getOrdreActuel()[1]==1) {
+			if (tempPartie.getOrdreActuel()[0]==1) {
 				tempPartie.setTour(1);
 			} else {
 				tempPartie.setTour(2);
 			}
 			
+			panel.removeAll();
+			setContentPane(buildContentPane());
+			
 			debutTour();
-		}
-		else {
-		JOptionPane.showMessageDialog(null, "Partie finie","Fin de partie",JOptionPane.INFORMATION_MESSAGE);
-		// afficher le score, clap clap bravo
 		}
 	}
 	
@@ -439,6 +454,19 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			System.out.println("aie...");
 		}
 		
+		
+	}
+	
+	public void defausser() {
+		defausseActive=false;
+		
+		if (tempPartie.getTour()==1) {
+			tempPartie.getJ1().defausser(terrainSelected[0]);
+		} else {
+			tempPartie.getJ2().defausser(terrainSelected[0]);
+		}
+		
+		finPhase();
 		
 	}
 
