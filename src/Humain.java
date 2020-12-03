@@ -5,34 +5,25 @@ public class Humain extends Joueur {
         super(nom);
     }
 
-    //prend en l'id num et les deux terrains t1 et t2 de la tuile et les coord respectives de chaque terrain coord1, coord2
+    //prend num la position de la tuile dans reservation les deux terrains(1 ou 2) et leur coordonnées
     //retourne true si a marché
-    public boolean placerTuile(int num, Coord coord1, Coord coord2){
+    public boolean placerTuile(int num, Coord coord1, int terrain1, Coord coord2, int terrain2){
+
         //trouve la position de la tuile dans la reservation
-        int i = 0;
-        for(;this.reservation[i].getId() != num;i++){
+
+        //vérifie que les deux coordonnées sont adjacentes
+        if ( (coord1.getLigne() == coord2.getLigne() && coord1.getColonne() == (coord2.getColonne() - 1)) ||
+            (coord1.getLigne() == coord2.getLigne() && coord2.getColonne() == (coord1.getColonne() - 1)) ||
+            (coord1.getColonne() == coord2.getColonne() && coord1.getLigne() == (coord2.getLigne() - 1)) ||
+            (coord1.getColonne() == coord2.getColonne() && coord2.getLigne() == (coord1.getLigne() - 1))) {
+                System.out.println("ok t'as bien positionné");
+        } else {
+                System.out.println("terrains non adjacents");
+                return false;
         }
 
-        //modifie l'orientation de la tuile selon les terrains de positionnement choisis
-        //vérifie orientation 0
-        if(coord1.getLigne() == coord2.getLigne() && coord1.getColonne() == (coord2.getColonne() - 1)) {
-            this.reservation[i].setOrientation(0);
-        } else //vérifie position 2
-            if(coord1.getLigne() == coord2.getLigne() && coord2.getColonne() == (coord1.getColonne() - 1)) {
-                this.reservation[i].setOrientation(2);
-            } else //vérifie position 1
-                if(coord1.getColonne() == coord2.getColonne() && coord1.getLigne() == (coord2.getLigne() - 1)) {
-                    this.reservation[i].setOrientation(1);
-                } else //vérifie position 3
-                    if(coord1.getColonne() == coord2.getColonne() && coord2.getLigne() == (coord1.getLigne() - 1)){
-                        this.reservation[i].setOrientation(3);
-                    } else {
-                        //les terrains ne sont pas adjacents
-                        return false;
-                    }
-
         //appele la methode recevoir tuile pour positionner la tuile
-        boolean succes = this.grille.recevoirTuile(this.reservation[i], coord1,coord2);
+        boolean succes = this.grille.recevoirTuile(this.reservation[num], coord1, terrain1, coord2, terrain2);
         if(succes){
             this.reservation[num] = null;
             return true;

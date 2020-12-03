@@ -32,6 +32,7 @@ public class Grille {
     public void setCase(Coord c,int[] entree){
         this.contenu[c.getLigne()][c.getColonne()] = entree;
     }
+
     //vérifie que la case est libre et qu'une des cases autour a le même type de terrain
     public boolean verifieValidite(Coord coord, int[] terrain) {
         //verfie que la case est libre
@@ -78,9 +79,9 @@ public class Grille {
     }
 
     //retourne false et ne fait rien si c'est impossible de placer la tuile sur les coordonnées données
-    public boolean recevoirTuile(Tuile tuile, Coord coord1, Coord coord2) {
-        int orientation = tuile.getOrientation();
-        if(orientation == 0 || orientation == 1){
+    public boolean recevoirTuile(Tuile tuile, Coord coord1, int terrain1, Coord coord2, int terrain2) {
+
+        if(terrain1 == 1){
             if(this.verifieValidite(coord1,tuile.getTerrain1()) || this.verifieValidite(coord2, tuile.getTerrain2())){
                 this.setCase(coord1, tuile.getTerrain1());
                 this.setCase(coord2, tuile.getTerrain2());
@@ -88,7 +89,7 @@ public class Grille {
             }
         return false;
         }
-        if(orientation == 2 || orientation == 3){
+        if(terrain1 ==2){
             if(this.verifieValidite(coord2,tuile.getTerrain1()) || this.verifieValidite(coord1, tuile.getTerrain2())){
                 this.setCase(coord2, tuile.getTerrain1());
                 this.setCase(coord1, tuile.getTerrain2());

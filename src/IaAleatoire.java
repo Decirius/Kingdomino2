@@ -64,7 +64,7 @@ public class IaAleatoire extends Ia
         Collections.shuffle(places);
         Coord[] emplacement = places.get(0);
         //essaye de poser la tuile (normalement cela marche et renvoi true)
-        if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], emplacement[1])) {
+        if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 1, emplacement[1], 2)) {
             //retire de la reservation avant de renvoyer true
             this.getReservation()[tuile] = null;
             return true;
@@ -72,7 +72,7 @@ public class IaAleatoire extends Ia
         //si malfré tout un problème renvoie false
         return false;
     }
-    public boolean placerTuile(int num, Coord coord1, Coord coord2){
+    public boolean placerTuile(int num, Coord coord1, int terrrain1, Coord coord2, int terrain2){
         return false;
     }
 

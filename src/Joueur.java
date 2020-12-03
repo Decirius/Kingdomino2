@@ -89,5 +89,5 @@ public abstract class Joueur {
         this.reservation[num] = null;
     }
 
-    public abstract boolean placerTuile(int num, Coord coord1, Coord coord2);
+    public abstract boolean placerTuile(int num, Coord coord1, int terrrain1, Coord coord2, int terrain2);
 }
