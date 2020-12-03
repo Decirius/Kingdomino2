@@ -26,7 +26,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 	public FenetreJeu(Partie partie) {
 		
-		// Cr�ation de la fenetre
+		// Creation de la fenetre
 		this.tempPartie=partie;
 		setTitle("Kingdomino - Partie en cours");
 		setSize(1000,800);
@@ -37,7 +37,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		setVisible(true);			
 		
 		
-		JOptionPane.showMessageDialog(null, "<html>Blabla r�gle blabla</html>","Rappel de r�gles", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
 		
 		debutTour();
 	}
@@ -287,7 +287,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			this.dispose();
 		}
 		if (e.getSource().equals(rules)) {
-			JOptionPane.showMessageDialog(null, "<html>Blabla r�gle blabla</html>","Rappel de r�gles", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
@@ -297,10 +297,10 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		String text2;
 		
 		if (tempPartie.getTour() == 1) {
-			text1="<html>Joueur 1, � toi de jouer.<br><br>";
+			text1="<html>Joueur 1, a toi de jouer.<br><br>";
 		}
 		else {
-			text1="<html>Joueur 2, � toi de jouer.<br><br>";
+			text1="<html>Joueur 2, a toi de jouer.<br><br>";
 		}
 		
 		switch (tempPartie.getPhase()) {
@@ -308,14 +308,14 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			case 2:
 			case 3:
 			case 4:
-				text2="S�lectionner une tuile.</html>";
+				text2="Selectionner une tuile.</html>";
 				break;
 			case 5:
 			case 6: 
 			case 7: 
 			case 8: 
-				text2="S�lectionner le terrain que vous voulez positionner, puis "
-						+ "cliquer sur la case de destination. Puis s�lectionner"
+				text2="Selectionner le terrain que vous voulez positionner, puis "
+						+ "cliquer sur la case de destination. Puis selectionner"
 						+ "la case du second terrain de la tuile.";
 				break;
 			default :
@@ -391,7 +391,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	public void verif() {
 		
 		if (this.tempPartie.verifChoixTuile(this.tuileSelected)==true) {
-			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est d�j� r�serv�e.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est deja reservee.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {			
 			this.tempPartie.setTempOrdreIndice(this.tuileSelected, this.tempPartie.getTour());
@@ -419,7 +419,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			System.out.println("WAOUH");
 			finPhase();
 		} else {
-			System.out.println("c'�tait un peu pr�visible :'(");
+			System.out.println("aie...");
 		}
 		
 		

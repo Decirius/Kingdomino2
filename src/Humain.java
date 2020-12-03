@@ -6,26 +6,29 @@ public class Humain extends Joueur {
     }
 
     //prend en l'id num et les deux terrains t1 et t2 de la tuile et les coord respectives de chaque terrain coord1, coord2
-    //retourne true si a marché
+    //retourne true si a marche
     public boolean placerTuile(int num, Coord coord1, Coord coord2){
+    	
         //trouve la position de la tuile dans la reservation
-        int i = 0;
-        for(;this.reservation[i].getId() != num;i++){
-        }
+        int i = num;
 
         //modifie l'orientation de la tuile selon les terrains de positionnement choisis
-        //vérifie orientation 0
+        //verifie orientation 0
         if(coord1.getLigne() == coord2.getLigne() && coord1.getColonne() == (coord2.getColonne() - 1)) {
             this.reservation[i].setOrientation(0);
-        } else //vérifie position 2
+            
+        } else //verifie position 2
             if(coord1.getLigne() == coord2.getLigne() && coord2.getColonne() == (coord1.getColonne() - 1)) {
                 this.reservation[i].setOrientation(2);
-            } else //vérifie position 1
+                
+            } else //verifie position 1
                 if(coord1.getColonne() == coord2.getColonne() && coord1.getLigne() == (coord2.getLigne() - 1)) {
                     this.reservation[i].setOrientation(1);
-                } else //vérifie position 3
+                    
+                } else //verifie position 3
                     if(coord1.getColonne() == coord2.getColonne() && coord2.getLigne() == (coord1.getLigne() - 1)){
                         this.reservation[i].setOrientation(3);
+                        
                     } else {
                         //les terrains ne sont pas adjacents
                         return false;
