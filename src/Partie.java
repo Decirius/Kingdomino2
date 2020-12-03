@@ -50,25 +50,39 @@ public class Partie {
 							new Tuile(new int[] {5,2},new int[] {0,0},45),
 							new Tuile(new int[] {3,0},new int[] {5,2},46),
 							new Tuile(new int[] {3,0},new int[] {5,2},47),
-							new Tuile(new int[] {0,0},new int[] {5,3},43)};
+							new Tuile(new int[] {0,0},new int[] {5,3},48)};
     
     
     private Joueur j1;
     private Joueur j2;
     private Tuile[] tirage;
+    private int tour;					// Varie de tour (J)1 à (J)2 
+    private int phase;					// ------------------
+    private int round; 					// Variant de 1 à 12
+    private int[] tempOrdre;			// ordre pour le Round prochain
+    private int[] ordreActuel;			// ordre pour le Round courant
+    
     
 
     public Partie(String j1, String j2){
         this.j1 = new Joueur(j1);
-        this.j2 = new Joueur((j2));
+        this.j2 = new Joueur(j2);
         melangerPile();
         this.tirage = new Tuile[4];
+        faireTirage();
+        this.tour=1;
+        this.phase=1;
+        this.round=1;
+        initTempOrdre();
+        this.j1.setOrdre(new int[] {1,3});
+        this.j2.setOrdre(new int[] {2,4});
+        this.ordreActuel=new int[] {1,2,1,2};
     }
 
     public void melangerPile(){
-        List<Tuile> intList = Arrays.asList(this.pile);//transforme le tableau en liste
-        Collections.shuffle(intList);//melange la liste
-        intList.toArray(this.pile);//retransforme la liste en un tableau
+        List<Tuile> intList = Arrays.asList(this.pile);		//transforme le tableau en liste
+        Collections.shuffle(intList);						//melange la liste
+        intList.toArray(this.pile);							//retransforme la liste en un tableau
     }
 
     public void faireTirage() {
@@ -92,6 +106,109 @@ public class Partie {
     public Joueur getJ2(){
         return this.j2;
     }
+    
+    public int getTour() {
+    	return this.tour;
+    }
+    
+    public int getPhase() {
+    	return this.phase;
+    }
+    
+    public void setPhase(int pha) {
+    	this.phase=pha;
+    }
+    
+    public void setTour(int tou) {
+    	this.tour=tou;
+    }
 
+    public int getRound() {
+    	return this.round;
+    }
+    
+    public void setRound(int rou) {
+    	this.round=rou;
+    }
+    
+    public int[] getTempOrdre() {
+    	return this.tempOrdre;
+    }
+    
+    public void setTempOrdre(int[] to) {
+    	this.tempOrdre=to;
+    }
+    
+    public void setTempOrdreIndice(int indice, int val) {
+    	this.tempOrdre[indice]=val;
+    }
+    
+    public void initTempOrdre() {
+    	this.tempOrdre=new int[] {0,0,0,0};
+    }
+    
+    public int[] getOrdreActuel() {
+    	return this.ordreActuel;
+    }
+    
+    public void setOrdreActuel(int[] oa) {
+    	this.ordreActuel=oa;
+    }
+    
+    public void setOrdreActuelIndice(int indice, int val) {
+    	this.ordreActuel[indice]=val;
+    }
+    
+    public boolean verifChoixTuile(int tuileSelected) {
+    	
+    	boolean dejaRes=false;
+    	
+    	for (int i=0; i<2;i++) {  // On verifie si la tuile est déjà réservée chez J1 ou J2
+    		if (this.j1.getReservation()[i]!=null) {
+	    		if (this.j1.getReservation()[i].getId()==this.tirage[tuileSelected].getId()) {
+	       			dejaRes=true;
+	    		}
+    		}
+	    	if (this.j2.getReservation()[i]!=null) {
+	    		if (this.j2.getReservation()[i].getId()==this.tirage[tuileSelected].getId()) {
+	    			dejaRes=true;
+	    		}
+	    	}
+    	}
+    	
+    	if (dejaRes==false) {    // la tuile est disponible
+	    	if (this.tour==1) {
+	    		this.j1.setReservation(this.tirage[tuileSelected]);
+	    	} else {
+	    		this.j2.setReservation(this.tirage[tuileSelected]);
+	    	}
+    	}
+    	
+    	return dejaRes;			  
+    }
+    
+    public void majOrdre() {
+    	
+    	int indice1=0;
+    	int indice2=0;
+    	
+    	for (int i=0;i<4;i++) {
+    	
+    		if (this.tempOrdre[i]==1) {
+    			System.out.println("J1");
+    			this.j1.setOrdreIndice(indice1,i);
+    			indice1+=1;
+    		} else {
+    			System.out.println("J2");
+    			this.j2.setOrdreIndice(indice2,i);
+    			indice2+=1;
+    		}
+    			
+    	}
+    	
+    	this.ordreActuel=this.tempOrdre;
+    	initTempOrdre();
+    }
 
+    
 }
