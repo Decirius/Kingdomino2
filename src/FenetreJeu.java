@@ -380,6 +380,13 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			tempPartie.setPhase(1);
 			tempPartie.faireTirage();
 			tempPartie.majOrdre();
+			
+			if (tempPartie.getOrdreActuel()[1]==1) {
+				tempPartie.setTour(1);
+			} else {
+				tempPartie.setTour(2);
+			}
+			
 			debutTour();
 		}
 		else {
@@ -402,14 +409,24 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	public void positionne() {
 		
 		boolean correct;
+		int terrain1=0;
+		int terrain2=0;
 		
-		 System.out.println("1 : Ligne "+coordSelected[0].getLigne()+", colonne :"+coordSelected[0].getColonne());
-	     System.out.println("2 : Ligne "+coordSelected[1].getLigne()+", colonne :"+coordSelected[1].getColonne());
+		System.out.println("1 : Ligne "+coordSelected[0].getLigne()+", colonne :"+coordSelected[0].getColonne());
+	    System.out.println("2 : Ligne "+coordSelected[1].getLigne()+", colonne :"+coordSelected[1].getColonne());
 		
+	    if (terrainSelected[1]==1) {
+	    	terrain1=1;
+	    	terrain2=2;
+	    } else {
+	    	terrain1=2;
+	    	terrain2=1;
+	    }
+	    
 		if(tempPartie.getTour()==1) {
-			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],coordSelected[0], coordSelected[1]);
+			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],coordSelected[0],terrain1, coordSelected[1],terrain2);
 		} else {
-			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],coordSelected[0], coordSelected[1]);
+			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],coordSelected[0],terrain1, coordSelected[1],terrain2);
 		}
 		
 		terrainSelected = new int[2];

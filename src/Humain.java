@@ -6,7 +6,7 @@ public class Humain extends Joueur {
     }
 
     //prend num la position de la tuile dans reservation les deux terrains(1 ou 2) et leur coordonnées
-    //retourne true si a marché
+    //retourne true si a marchee
     public boolean placerTuile(int num, Coord coord1, int terrain1, Coord coord2, int terrain2){
 
 
@@ -15,7 +15,7 @@ public class Humain extends Joueur {
             (coord1.getLigne() == coord2.getLigne() && coord2.getColonne() == (coord1.getColonne() - 1)) ||
             (coord1.getColonne() == coord2.getColonne() && coord1.getLigne() == (coord2.getLigne() - 1)) ||
             (coord1.getColonne() == coord2.getColonne() && coord2.getLigne() == (coord1.getLigne() - 1))) {
-                System.out.println("ok t'as bien positionné");
+                System.out.println("ok t'as bien positionne");
         } else {
                 System.out.println("terrains non adjacents");
                 return false;
