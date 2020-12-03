@@ -26,7 +26,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 	public FenetreJeu(Partie partie) {
 		
-		// Création de la fenetre
+		// Crï¿½ation de la fenetre
 		this.tempPartie=partie;
 		setTitle("Kingdomino - Partie en cours");
 		setSize(1000,800);
@@ -37,7 +37,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		setVisible(true);			
 		
 		
-		JOptionPane.showMessageDialog(null, "<html>Blabla règle blabla</html>","Rappel de règles", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "<html>Blabla rï¿½gle blabla</html>","Rappel de rï¿½gles", JOptionPane.INFORMATION_MESSAGE);
 		
 		debutTour();
 	}
@@ -164,7 +164,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 								}
 		
 							} else {
-								System.out.println("Erreur : pas de terrain sélectionné");
+								System.out.println("Erreur : pas de terrain sï¿½lectionnï¿½");
 							}
 						}
 					}
@@ -232,7 +232,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 		sauvegarder = new JMenuItem ("Sauvegarder");
 		quitter = new JMenuItem ("Quitter");
-		rules = new JMenuItem ("Règles");
+		rules = new JMenuItem ("Rï¿½gles");
 		
 		JMenu menuFile = new JMenu("Fichier");
 		JMenu menuAide = new JMenu("Aide");
@@ -287,7 +287,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			this.dispose();
 		}
 		if (e.getSource().equals(rules)) {
-			JOptionPane.showMessageDialog(null, "<html>Blabla règle blabla</html>","Rappel de règles", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Blabla rï¿½gle blabla</html>","Rappel de rï¿½gles", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
@@ -297,10 +297,10 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		String text2;
 		
 		if (tempPartie.getTour() == 1) {
-			text1="<html>Joueur 1, à toi de jouer.<br><br>";
+			text1="<html>Joueur 1, ï¿½ toi de jouer.<br><br>";
 		}
 		else {
-			text1="<html>Joueur 2, à toi de jouer.<br><br>";
+			text1="<html>Joueur 2, ï¿½ toi de jouer.<br><br>";
 		}
 		
 		switch (tempPartie.getPhase()) {
@@ -308,14 +308,14 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			case 2:
 			case 3:
 			case 4:
-				text2="Sélectionner une tuile.</html>";
+				text2="Sï¿½lectionner une tuile.</html>";
 				break;
 			case 5:
 			case 6: 
 			case 7: 
 			case 8: 
-				text2="Sélectionner le terrain que vous voulez positionner, puis "
-						+ "cliquer sur la case de destination. Puis sélectionner"
+				text2="Sï¿½lectionner le terrain que vous voulez positionner, puis "
+						+ "cliquer sur la case de destination. Puis sï¿½lectionner"
 						+ "la case du second terrain de la tuile.";
 				break;
 			default :
@@ -391,7 +391,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	public void verif() {
 		
 		if (this.tempPartie.verifChoixTuile(this.tuileSelected)==true) {
-			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est déjà réservée.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est dï¿½jï¿½ rï¿½servï¿½e.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {			
 			this.tempPartie.setTempOrdreIndice(this.tuileSelected, this.tempPartie.getTour());
@@ -407,9 +407,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	     System.out.println("2 : Ligne "+coordSelected[1].getLigne()+", colonne :"+coordSelected[1].getColonne());
 		
 		if(tempPartie.getTour()==1) {
-			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],terrainSelected[1],coordSelected[0], coordSelected[1]);
+			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],coordSelected[0], coordSelected[1]);
 		} else {
-			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],terrainSelected[1], coordSelected[0], coordSelected[1]);
+			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],coordSelected[0], coordSelected[1]);
 		}
 		
 		terrainSelected = new int[2];
@@ -419,7 +419,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			System.out.println("WAOUH");
 			finPhase();
 		} else {
-			System.out.println("c'était un peu prévisible :'(");
+			System.out.println("c'ï¿½tait un peu prï¿½visible :'(");
 		}
 		
 		

@@ -19,7 +19,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 	
 	public FenetreChoix() {
 		
-		// Création de la fenetre
+		// Crï¿½ation de la fenetre
 		
 		setTitle("Kingdomino - Choix des joueurs");
 		setSize(500,500);
@@ -107,7 +107,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		
 		if (e.getSource().equals(boutonValider)) {
 			
-			Partie partie = new Partie(choixnom.getText(),choixnom2.getText());
+			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),0,0);
 			FenetreJeu jeu = new FenetreJeu(partie);
 			jeu.setVisible(true);
 			this.setVisible(false);

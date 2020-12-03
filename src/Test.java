@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) {
-        Partie partie1 = new Partie("nom","nom2");
+        Partie partie1 = new Partie("nom","nom2", 0, 0);
         Joueur joueur = partie1.getJ1();
         Grille grille = joueur.getGrille();
         System.out.println(Arrays.deepToString(grille.getContenu()));

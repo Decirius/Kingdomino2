@@ -56,17 +56,32 @@ public class Partie {
     private Joueur j1;
     private Joueur j2;
     private Tuile[] tirage;
-    private int tour;					// Varie de tour (J)1 à (J)2 
+    private int tour;					// Varie de tour (J)1 ï¿½ (J)2 
     private int phase;					// ------------------
-    private int round; 					// Variant de 1 à 12
+    private int round; 					// Variant de 1 ï¿½ 12
     private int[] tempOrdre;			// ordre pour le Round prochain
     private int[] ordreActuel;			// ordre pour le Round courant
-    
-    
 
-    public Partie(String j1, String j2){
-        this.j1 = new Joueur(j1);
-        this.j2 = new Joueur(j2);
+
+
+	//type joueur 0 pour humain, 1 pour iaAleatoire
+    public Partie(String j1, String j2, int typeJoueur1, int typeJoueur2){
+    	switch (typeJoueur1) {
+			case (0):
+				this.j1 = new Humain(j1);
+				break;
+			case (1):
+				this.j1 = new IaAleatoire(j1);
+				break;
+		}
+		switch (typeJoueur2) {
+			case (0):
+				this.j2 = new Humain(j1);
+				break;
+			case (1):
+				this.j2 = new IaAleatoire(j1);
+				break;
+		}
         melangerPile();
         this.tirage = new Tuile[4];
         faireTirage();
@@ -163,7 +178,7 @@ public class Partie {
     	
     	boolean dejaRes=false;
     	
-    	for (int i=0; i<2;i++) {  // On verifie si la tuile est déjà réservée chez J1 ou J2
+    	for (int i=0; i<2;i++) {  // On verifie si la tuile est dï¿½jï¿½ rï¿½servï¿½e chez J1 ou J2
     		if (this.j1.getReservation()[i]!=null) {
 	    		if (this.j1.getReservation()[i].getId()==this.tirage[tuileSelected].getId()) {
 	       			dejaRes=true;

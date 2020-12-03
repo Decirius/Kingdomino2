@@ -72,6 +72,8 @@ public class IaAleatoire extends Ia
         //si malfré tout un problème renvoie false
         return false;
     }
-
+    public boolean placerTuile(int num, Coord coord1, Coord coord2){
+        return false;
+    }
 
 }

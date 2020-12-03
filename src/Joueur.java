@@ -1,5 +1,5 @@
 
-public class Joueur {
+public abstract class Joueur {
 
     protected Grille grille;
     protected String nom;
@@ -7,6 +7,7 @@ public class Joueur {
     protected int [] ordre;
     protected Tuile [] defausse;
     protected int score;
+
 
     public Joueur(String nom){
         this.grille = new Grille();
@@ -88,4 +89,5 @@ public class Joueur {
         this.reservation[num] = null;
     }
 
+    public abstract boolean placerTuile(int num, Coord coord1, Coord coord2);
 }
