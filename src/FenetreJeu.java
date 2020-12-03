@@ -378,6 +378,8 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			
 			tempPartie.setRound(tempPartie.getRound()+1);
 			tempPartie.setPhase(1);
+			tempPartie.faireTirage();
+			tempPartie.majOrdre();
 			debutTour();
 		}
 		else {
@@ -405,9 +407,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	     System.out.println("2 : Ligne "+coordSelected[1].getLigne()+", colonne :"+coordSelected[1].getColonne());
 		
 		if(tempPartie.getTour()==1) {
-			correct=tempPartie.getJ1().placerTuile(terrainSelected[0], coordSelected[0], coordSelected[1]);
+			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],terrainSelected[1],coordSelected[0], coordSelected[1]);
 		} else {
-			correct=tempPartie.getJ2().placerTuile(terrainSelected[0], coordSelected[0], coordSelected[1]);
+			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],terrainSelected[1], coordSelected[0], coordSelected[1]);
 		}
 		
 		terrainSelected = new int[2];

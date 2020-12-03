@@ -187,4 +187,28 @@ public class Partie {
     	return dejaRes;			  
     }
     
+    public void majOrdre() {
+    	
+    	int indice1=0;
+    	int indice2=0;
+    	
+    	for (int i=0;i<4;i++) {
+    	
+    		if (this.tempOrdre[i]==1) {
+    			System.out.println("J1");
+    			this.j1.setOrdreIndice(indice1,i);
+    			indice1+=1;
+    		} else {
+    			System.out.println("J2");
+    			this.j2.setOrdreIndice(indice2,i);
+    			indice2+=1;
+    		}
+    			
+    	}
+    	
+    	this.ordreActuel=this.tempOrdre;
+    	initTempOrdre();
+    }
+
+    
 }
