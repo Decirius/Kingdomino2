@@ -76,16 +76,25 @@ public abstract class Joueur {
     public int getScore() {
         return score;
     }
+    
+    public abstract boolean placerTuile();
+    
+    public int reserver(Tuile[] tirage,int[] tempOrdre) {
+    	return 0;
+    }
 
     public void defausser(int num){
+    	
+    	System.out.println("defausse");
+    	
         int i = 0;
-        //s'arrete quand est arrivé sur le premier emplacement vide de la défausse
+        				//s'arrete quand est arrivee sur le premier emplacement vide de la défausse
         for (; this.defausse[i] != null; i++) {
 
         }
-        //place la tuile dans la defausse
+        				//place la tuile dans la defausse
         this.defausse[i] = this.reservation[num];
-        //enlever la tuile de la reservation
+        				//enlever la tuile de la reservation
         this.reservation[num] = null;
     }
 

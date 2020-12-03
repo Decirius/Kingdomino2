@@ -2,6 +2,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 
 import javax.swing.*;
@@ -312,11 +315,34 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	}
 	
 	public void debutTour() {
-		String text1 ;
-		String text2;
+
 		defausseActive=false;
 		
-		if (tempPartie.getTour() == 1) {
+	
+		if (tempPartie.getTour()==1) {
+			if (tempPartie.getJ1() instanceof Ia ) {
+				System.out.println("ia");
+				tourIa(1);
+			} else {
+				System.out.println("humain");
+				tourHumain(1);
+			}
+		} else {
+			if (tempPartie.getJ2() instanceof Ia) {
+				System.out.println("ia");
+				tourIa(2);
+			} else {
+				System.out.println("humain");
+				tourHumain(2);
+			}
+		}
+	}
+	
+	public void tourHumain(int idJ) {
+		String text1 ;
+		String text2 ;
+		
+		if (idJ == 1) {
 			text1="<html>"+tempPartie.getJ1().getNom()+", a toi de jouer.<br><br>";
 		}
 		else {
@@ -343,15 +369,59 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				break;
 		}
 		
-		
 		JOptionPane.showMessageDialog(null, text1+text2,"Tour de jeu", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void finPhase() {
+	public void tourIa(int idJ) {
+		
+		
+		
+		switch (tempPartie.getPhase()) {
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			int tuileChoisie ;
+			
+			if (idJ==1) {
+ 				tuileChoisie = tempPartie.getJ1().reserver(tempPartie.getTirage(),tempPartie.getTempOrdre());
+ 				
+ 				
+			} else {
+				tuileChoisie = tempPartie.getJ2().reserver(tempPartie.getTirage(),tempPartie.getTempOrdre());
+			}
+			
+			this.tempPartie.setTempOrdreIndice(tuileChoisie, this.tempPartie.getTour());
+			
+			break;
+		case 5:
+		case 6: 
+		case 7: 
+		case 8: 
+			if (idJ==1) {
+				tempPartie.getJ1().placerTuile();
+			} else {
+				tempPartie.getJ2().placerTuile();
+			}
+			break;
+		default :
+			break;
+		}
+		
+		//ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+		//executorService.scheduleAtFixedRate(, 0, 1, TimeUnit.SECONDS);
+		
+		
+		finPhase();
+		
+	}
+	
+	public void finPhase(){
 		switch (tempPartie.getPhase()) {
 			case 1:
 			case 2:
 			case 3:
+				System.out.println("Fin du tour de : "+tempPartie.getTour());
 				if (tempPartie.getOrdreActuel()[tempPartie.getPhase()]==1) {
 					tempPartie.setTour(1);
 				} else {
@@ -374,6 +444,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		if (tempPartie.getPhase()==8) {
 			finRound();
 		} else {
+			System.out.println("fin de phase" + tempPartie.getPhase());
 			tempPartie.setPhase(tempPartie.getPhase()+1);
 			panel.removeAll();
 			setContentPane(buildContentPane());
