@@ -76,10 +76,10 @@ public class Partie {
 		}
 		switch (typeJoueur2) {
 			case (0):
-				this.j2 = new Humain(j1);
+				this.j2 = new Humain(j2);
 				break;
 			case (1):
-				this.j2 = new IaAleatoire(j1);
+				this.j2 = new IaAleatoire(j2);
 				break;
 		}
         melangerPile();
