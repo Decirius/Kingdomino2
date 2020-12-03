@@ -9,7 +9,6 @@ public class Humain extends Joueur {
     //retourne true si a marché
     public boolean placerTuile(int num, Coord coord1, int terrain1, Coord coord2, int terrain2){
 
-        //trouve la position de la tuile dans la reservation
 
         //vérifie que les deux coordonnées sont adjacentes
         if ( (coord1.getLigne() == coord2.getLigne() && coord1.getColonne() == (coord2.getColonne() - 1)) ||
@@ -21,6 +20,7 @@ public class Humain extends Joueur {
                 System.out.println("terrains non adjacents");
                 return false;
         }
+
 
         //appele la methode recevoir tuile pour positionner la tuile
         boolean succes = this.grille.recevoirTuile(this.reservation[num], coord1, terrain1, coord2, terrain2);

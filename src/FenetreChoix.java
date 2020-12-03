@@ -19,7 +19,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 	
 	public FenetreChoix() {
 		
-		// Cr�ation de la fenetre
+		// Creation de la fenetre
 		
 		setTitle("Kingdomino - Choix des joueurs");
 		setSize(500,500);
@@ -64,8 +64,32 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		
 		choixHumain = new JRadioButton ("Humain",true);
 		choixIa = new JRadioButton ("IA");
+		choixHumain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choixIa.setSelected(false);
+			}
+		});
+		choixIa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choixHumain.setSelected(false);
+			}
+		});
+		
+		
+		
 		choix2Humain = new JRadioButton("Humain",true);
+		
 		choix2Ia = new JRadioButton ("IA");
+		choix2Humain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choix2Ia.setSelected(false);
+			}
+		});
+		choix2Ia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choix2Humain.setSelected(false);
+			}
+		});
 		
 		boutonQuitter = new JButton("Quitter");
 		boutonValider = new JButton ("Valider");
@@ -107,7 +131,24 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		
 		if (e.getSource().equals(boutonValider)) {
 			
-			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),0,0);
+			int valJ1=0;
+			int valJ2=0;
+			
+			if (choixHumain.isSelected()) {
+				valJ1=0;
+			} else if (choixIa.isSelected()) {
+				valJ1=1;
+			}
+			
+			if (choix2Humain.isSelected()) {
+				valJ2=0;
+			} else if (choix2Ia.isSelected()) {
+				valJ2=1;
+			}
+			
+				
+				
+			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),valJ1,valJ2);
 			FenetreJeu jeu = new FenetreJeu(partie);
 			jeu.setVisible(true);
 			this.setVisible(false);
