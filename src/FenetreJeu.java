@@ -16,11 +16,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	JMenuItem rules;
 	
 	Partie tempPartie;
-	int tour ;
-	int phase;
 	int tuileSelected;
-	Coord coordSelected;
-	int[] tempOrdre = new int[] {0,0,0,0};
+	int[] terrainSelected;
+	Coord[] coordSelected= new Coord[2];
 	int[] reserved = new int[]{0,0,0,0};
 	
 	private static final long serialVersionUID = 1L;
@@ -29,9 +27,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	public FenetreJeu(Partie partie) {
 		
 		// Création de la fenetre
-		
-		initPartie(partie);
-		
+		this.tempPartie=partie;
 		setTitle("Kingdomino - Partie en cours");
 		setSize(1000,800);
 		setLocationRelativeTo(null);
@@ -43,17 +39,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 		JOptionPane.showMessageDialog(null, "<html>Blabla règle blabla</html>","Rappel de règles", JOptionPane.INFORMATION_MESSAGE);
 		
-		tourJeu();
+		debutTour();
 	}
 	
-	private void initPartie(Partie partie) {
-		tempPartie=partie;
-		tempPartie.faireTirage();
-		tempPartie.getJ1().setOrdre(new int[]{-1,-1});
-		tempPartie.getJ2().setOrdre(new int[]{-1,-1});
-		tour=1;
-		phase=1;
-	}
 	
 	private JPanel buildContentPane() {
 		
@@ -93,24 +81,29 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		panelDroite.add(grille2);
 		
 		
-		
-		for (int i=0; i<4;i++ ) {
-			panelBasTuile.add(constructTuile(tempPartie.getTirage()[i],i));		
-		}	
-		
-		
-		for (int i=0; i<4;i++ ) {
+		if (tempPartie.getPhase()<5) {
+			for (int i=0; i<4;i++ ) {
+				panelBasTuile.add(constructTuile(tempPartie.getTirage()[i],i));		
+			}	
 			
-			if (reserved[i]==0) {
-				panelBasToken.add(constructToken(0,-1));
+			
+			for (int i=0; i<4;i++ ) {
+				
+				if (tempPartie.getTempOrdre()[i]==0) {
+					panelBasToken.add(constructToken(0,-1));
+				} else {
+					panelBasToken.add(constructToken(tempPartie.getTempOrdre()[i],1));
+				}
 			}
-			else {
-				for (int j=0;j<2;j++) {
-					if (i==tempPartie.getJ1().getOrdre()[j]) {
-						panelBasToken.add(constructToken(0,1));
+		} else {
+			for (int j=0;j<2;j++) {
+				if (tempPartie.getTour()==1) {
+					if (tempPartie.getJ1().getReservation()[j]!=null) {
+						panelBasTuile.add(constructTuile(tempPartie.getJ1().getReservation()[j],j));	
 					}
-					if (i==tempPartie.getJ2().getOrdre()[j]) {
-						panelBasToken.add(constructToken(1,1));
+				} else {
+					if (tempPartie.getJ2().getReservation()[j]!=null) {
+						panelBasTuile.add(constructTuile(tempPartie.getJ2().getReservation()[j],j));	
 					}
 				}
 			}
@@ -128,7 +121,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		return panel;
 	}
 	
-	private JPanel constructGrille (Grille grilletest,int idG) {
+	private JPanel constructGrille (Grille grilletest,int idJ) {
 		
 		JPanel grille = new JPanel();
 		grille.setLayout(new GridLayout(7,7));
@@ -136,10 +129,11 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 		ImageIcon imgbg;
 		
-		for (int i =0; i<(7); i++){ 
-			for (int j=0; j<7;j++) {
+		
+		for (int iGrille =0; iGrille<(7); iGrille++){ 
+			for (int jGrille=0; jGrille<7;jGrille++) {
 				
-				Coord coord=new Coord(i,j);
+				Coord coord=new Coord(iGrille,jGrille);
 				String url="";
 				
 				if (grilletest.getCase(coord)==null) {
@@ -152,11 +146,27 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				imgbg= new ImageIcon(url); 
 				JLabel label = new JLabel(imgbg); 
 				label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				label.setName(""+i+""+j);
+				label.setName(""+iGrille+""+jGrille);
+				
 				
 				label.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
 						System.out.println(label.getName());
+						if (tempPartie.getPhase()>4) {
+							if (terrainSelected!=null) {
+								int var1=Integer.parseInt(label.getName().charAt(0)+"");
+								int var2=Integer.parseInt(label.getName().charAt(1)+"");
+								if (coordSelected[0]==null) {
+									coordSelected[0]=new Coord(var1,var2);
+								} else {
+									coordSelected[1]=new Coord(var1,var2);
+									positionne();
+								}
+		
+							} else {
+								System.out.println("Erreur : pas de terrain sélectionné");
+							}
+						}
 					}
 				});
 				
@@ -179,7 +189,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		ImageIcon imgbg= new ImageIcon(url); 
 		JLabel label = new JLabel(imgbg); 
 		label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		tuile.add(label); 
+		tuile.add(label); 		
 		
 		String url2="images/"+t.getTerrain2()[0]+"-"+t.getTerrain2()[1]+".jpg";
 		ImageIcon imgbg2= new ImageIcon(url2); 
@@ -192,9 +202,27 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		tuile.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				tuileSelected=indice;
-				verifChoixTuile();
+				verif();
+				
 			}
 		});
+		
+		if (tempPartie.getPhase()>4) {
+			
+			label.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					terrainSelected=new int[] {indice,1};
+					System.out.println("Terrain 1 Tuile "+indice);
+				}
+			});
+			
+			label2.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					terrainSelected=new int[] {indice,2};
+					System.out.println("Terrain 2 Tuile "+indice);
+				}
+			});
+		}
 		
 		return tuile;
 	}
@@ -232,7 +260,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		String url;
 		
 		if (val!=-1) {
-			if (idJ==0) {
+			if (idJ==1) {
 				couleur="J1";
 			} 
 			else {
@@ -264,18 +292,18 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 	}
 	
-	public void tourJeu() {
+	public void debutTour() {
 		String text1 ;
 		String text2;
 		
-		if (tour == 1) {
+		if (tempPartie.getTour() == 1) {
 			text1="<html>Joueur 1, à toi de jouer.<br><br>";
 		}
 		else {
 			text1="<html>Joueur 2, à toi de jouer.<br><br>";
 		}
 		
-		switch (phase) {
+		switch (tempPartie.getPhase()) {
 			case 1:
 			case 2:
 			case 3:
@@ -286,7 +314,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			case 6: 
 			case 7: 
 			case 8: 
-				text2="Positionner la tuile.";
+				text2="Sélectionner le terrain que vous voulez positionner, puis "
+						+ "cliquer sur la case de destination. Puis sélectionner"
+						+ "la case du second terrain de la tuile.";
 				break;
 			default :
 				text2="None";
@@ -298,54 +328,101 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	}
 	
 	public void finPhase() {
-		if (tour==1) {
-			tour=2;
-		} 
-		else {
-			tour=1;
+		switch (tempPartie.getPhase()) {
+			case 1:
+			case 2:
+			case 3:
+				if (tempPartie.getOrdreActuel()[tempPartie.getPhase()]==1) {
+					tempPartie.setTour(1);
+				} else {
+					tempPartie.setTour(2);
+				}
+				
+				break;
+			case 4:
+			case 5:
+				tempPartie.setTour(1);
+				break;
+			case 6:
+			case 7:
+				tempPartie.setTour(2);
+				break;
+			
 		}
-		phase=phase+1;
+
 		
-		panel.removeAll();
-		setContentPane(buildContentPane());
-		
-		tourJeu();
-		
+		if (tempPartie.getRound()<12) {
+			if (tempPartie.getPhase()==8) {
+				finRound();
+				
+			} else {
+				tempPartie.setPhase(tempPartie.getPhase()+1);
+			}
+			panel.removeAll();
+			setContentPane(buildContentPane());
+			debutTour(); 
+		} else {
+			panel.removeAll();
+			setContentPane(buildContentPane());
+			finRound();
+		}
 		
 		
 	}
 	
-	public void verifChoixTuile() {
-		boolean dejaRes=false;
-		for (int i=0;i<4;i++) {
-			if (reserved[tuileSelected]==1) {
-				dejaRes=true;
-			}
-		}
-		if (dejaRes==true) {
-			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est déjà réservée.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+	
+	public void finRound() {
+		
+		
+		if (tempPartie.getRound()<12) {
+			
+			tempPartie.setRound(tempPartie.getRound()+1);
+			tempPartie.setPhase(1);
+			tempPartie.faireTirage();
+			tempPartie.majOrdre();
+			debutTour();
 		}
 		else {
-			reserved[tuileSelected]=1;
-			
-			switch (phase) {
-				case 1:
-					tempPartie.getJ1().setOrdre(new int[]{tuileSelected,tempPartie.getJ1().getOrdre()[1]});
-					//tempPartie.getJ1().setReservation(tempPartie.getTirage()[tuileSelected]);
-					break;
-				case 2:
-					tempPartie.getJ2().setOrdre(new int[]{tuileSelected,tempPartie.getJ2().getOrdre()[1]});
-					break;
-				case 3:
-					tempPartie.getJ1().setOrdre(new int[]{tempPartie.getJ1().getOrdre()[0],tuileSelected});
-					break;
-				case 4:
-					tempPartie.getJ2().setOrdre(new int[]{tempPartie.getJ2().getOrdre()[0],tuileSelected});
-					break;
-			}
-			
+		JOptionPane.showMessageDialog(null, "Partie finie","Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+		// afficher le score, clap clap bravo
+		}
+	}
+	
+	public void verif() {
+		
+		if (this.tempPartie.verifChoixTuile(this.tuileSelected)==true) {
+			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est déjà réservée.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {			
+			this.tempPartie.setTempOrdreIndice(this.tuileSelected, this.tempPartie.getTour());
 			finPhase();
 		}
+	}
+	
+	public void positionne() {
+		
+		boolean correct;
+		
+		 System.out.println("1 : Ligne "+coordSelected[0].getLigne()+", colonne :"+coordSelected[0].getColonne());
+	     System.out.println("2 : Ligne "+coordSelected[1].getLigne()+", colonne :"+coordSelected[1].getColonne());
+		
+		if(tempPartie.getTour()==1) {
+			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],terrainSelected[1],coordSelected[0], coordSelected[1]);
+		} else {
+			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],terrainSelected[1], coordSelected[0], coordSelected[1]);
+		}
+		
+		terrainSelected = new int[2];
+		coordSelected = new Coord[2];
+		
+		if (correct) {
+			System.out.println("WAOUH");
+			finPhase();
+		} else {
+			System.out.println("c'était un peu prévisible :'(");
+		}
+		
+		
 	}
 
 }

@@ -13,7 +13,7 @@ public class Joueur {
         this.nom = nom;
         this.reservation = new Tuile[2];
         this.ordre = new int[2];
-        this.defausse = new Tuile[12];//nombre maximum de domino que peut avoir un joueur
+        this.defausse = new Tuile[12];			//nombre maximum de domino que peut avoir un joueur
         this.score = 0;
     }
 
@@ -38,6 +38,10 @@ public class Joueur {
 
     public void setOrdre(int[] ordre) {
         this.ordre = ordre;
+    }
+
+    public void setOrdreIndice(int indice, int ordre) {
+        this.ordre[indice] = ordre;
     }
 
     public void setDefausse(Tuile[] defausse) {
