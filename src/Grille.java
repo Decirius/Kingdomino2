@@ -33,7 +33,7 @@ public class Grille {
         this.contenu[c.getLigne()][c.getColonne()] = entree;
     }
 
-    //vérifie que la case est libre et qu'une des cases autour a le même type de terrain
+    //verifie que la case est libre et qu'une des cases autour a le même type de terrain
     public boolean verifieValidite(Coord coord, int[] terrain) {
         //verfie que la case est libre
         if(!this.estLibre(coord)){
@@ -41,9 +41,11 @@ public class Grille {
         }
         //recupere les terrains autour
         Coord [] cases = this.getCasesAutour(coord);
+        System.out.println("Longueur :"+cases.length);
         int[] centre = new int[] {-1,-1};
         for (int i = 0; i < cases.length; i++) {
-            //compare les terrains autour (que sont occupés et que le terrain est identique)
+        	System.out.println(i);
+            //compare les terrains autour (que sont occupees et que le terrain est identique)
             if(this.getCase(cases[i]) != null && (this.getCase(cases[i])[0] == terrain[0] || Arrays.equals(this.getCase(cases[i]), centre))) {
                 return true;
             }
@@ -54,6 +56,8 @@ public class Grille {
     public Coord[] getCasesAutour(Coord cor) {
         int ligne = cor.getLigne();
         int colonne = cor.getColonne();
+        System.out.println("ligne : "+ligne);
+        System.out.println("colonne : "+ colonne);
         if(ligne == 0 && colonne ==0){
             return new Coord[] {new Coord(ligne+1,colonne), new Coord(ligne,colonne+1)};
         }
@@ -73,6 +77,7 @@ public class Grille {
             return new Coord[] {new Coord(ligne-1,colonne),new Coord(ligne,colonne+1),new Coord(ligne,colonne-1)};
         }
         else {
+        	System.out.println("der");
             return new Coord[] {new Coord(ligne + 1, colonne), new Coord(ligne - 1, colonne),
                     new Coord(ligne, colonne + 1), new Coord(ligne, colonne - 1)};
         }
@@ -101,7 +106,7 @@ public class Grille {
     }
 
 
-
+ 
     public static void main(String[] args) {
     Grille grille = new Grille();
     System.out.println(Arrays.deepToString(grille.getContenu()));
@@ -112,5 +117,6 @@ public class Grille {
     System.out.println(grille.estLibre(coord));
     System.out.println(Arrays.deepToString(grille.getContenu()));
     }
+    
 
 }
