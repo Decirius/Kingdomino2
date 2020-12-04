@@ -42,10 +42,8 @@ public class Grille {
         }
         //recupere les terrains autour
         Coord [] cases = this.getCasesAutour(coord);
-        System.out.println("Longueur :"+cases.length);
         int[] centre = new int[] {-1,-1};
         for (int i = 0; i < cases.length; i++) {
-        	System.out.println(i);
             //compare les terrains autour (que sont occupees et que le terrain est identique)
             if(this.getCase(cases[i]) != null && (this.getCase(cases[i])[0] == terrain[0] || Arrays.equals(this.getCase(cases[i]), centre))) {
                 return true;

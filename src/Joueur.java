@@ -107,6 +107,8 @@ public abstract class Joueur {
     public List<int[]> getChamps() {
         return champs;
     }
+
+
         //ajout d'un terrain dans la grille de zone
     public void majGrilleZone(int[] terrain, Coord c){
         Coord[] autour = this.grilleZone.getCasesAutour(c);
@@ -136,7 +138,7 @@ public abstract class Joueur {
                             break;
                     }
                     terrainAutour = true;
-                    this.getGrille().setCase(c, new int[]{terrain[0], this.grilleZone.getCase(autour[i])[1]}); //rempli grille zone ou le terrain est pose
+                    this.getGrilleZone().setCase(c, new int[]{terrain[0], this.grilleZone.getCase(autour[i])[1]}); //rempli grille zone ou le terrain est pose
                         //met le type du terrain et la zone a laquelle est rattache
                 }
             }
@@ -322,4 +324,31 @@ public abstract class Joueur {
     }
 
     public abstract boolean placerTuile(int num, Coord coord1, int terrrain1, Coord coord2, int terrain2);
+
+    public void afficheZones(){
+        System.out.println("les champs");
+        this.champs.forEach(c -> {
+            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+        });
+        System.out.println("les pres");
+        this.pres.forEach(c -> {
+            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+        });
+        System.out.println("les lacs");
+        this.lacs.forEach(c -> {
+            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+        });
+        System.out.println("les marais");
+        this.marais.forEach(c -> {
+            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+        });
+        System.out.println("les forets");
+        this.forets.forEach(c -> {
+            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+        });
+        System.out.println("les mines");
+        this.mines.forEach(c -> {
+            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+        });
+    }
 }
