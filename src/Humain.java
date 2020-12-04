@@ -5,6 +5,16 @@ public class Humain extends Joueur {
         super(nom);
     }
     
+    public int scoreSelection() {
+		
+		return 0;
+	}
+	
+	public int scorePlacement() {
+		
+		return 0;
+	}
+    
     public boolean placerTuile() {
     	return false;
     };
