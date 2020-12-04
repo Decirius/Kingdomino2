@@ -9,12 +9,12 @@ public class Humain extends Joueur {
     	return false;
     };
 
-    //prend num la position de la tuile dans reservation les deux terrains(1 ou 2) et leur coordonnees
-    //retourne true si a marchee
+    		//prend num la position de la tuile dans reservation les deux terrains(1 ou 2) et leur coordonnees
+    		//retourne true si a marchee
     public boolean placerTuile(int num, Coord coord1, int terrain1, Coord coord2, int terrain2){
 
 
-        //verifie que les deux coordonnees sont adjacentes
+        		//verifie que les deux coordonnees sont adjacentes
         if ( (coord1.getLigne() == coord2.getLigne() && coord1.getColonne() == (coord2.getColonne() - 1)) ||
             (coord1.getLigne() == coord2.getLigne() && coord2.getColonne() == (coord1.getColonne() - 1)) ||
             (coord1.getColonne() == coord2.getColonne() && coord1.getLigne() == (coord2.getLigne() - 1)) ||
