@@ -459,6 +459,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 		if (tempPartie.getRound()==12) {
 			
+			panel.removeAll();
+			setContentPane(buildContentPane());
+			
 			JOptionPane.showMessageDialog(null, "Partie finie","Fin de partie",JOptionPane.INFORMATION_MESSAGE);
 			// afficher le score, clap clap bravo
 			

@@ -56,5 +56,15 @@ public abstract class Ia extends Joueur {
         });
         return places;
     }
+    
+    public int scoreSelection() {
+		
+		return 0;
+	}
+	
+	public int scorePlacement() {
+		
+		return 0;
+	}
 
 }

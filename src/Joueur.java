@@ -82,6 +82,16 @@ public abstract class Joueur {
     public int reserver(Tuile[] tirage,int[] tempOrdre) {
     	return 0;
     }
+    
+    public int scoreSelection() {
+		
+		return 0;
+	}
+	
+	public int scorePlacement() {
+		
+		return 0;
+	}
 
     public void defausser(int num){
     	

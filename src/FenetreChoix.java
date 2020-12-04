@@ -137,13 +137,13 @@ public class FenetreChoix extends JFrame implements ActionListener {
 			if (choixHumain.isSelected()) {
 				valJ1=0;
 			} else if (choixIa.isSelected()) {
-				valJ1=1;
+				valJ1=2;
 			}
 			
 			if (choix2Humain.isSelected()) {
 				valJ2=0;
 			} else if (choix2Ia.isSelected()) {
-				valJ2=1;
+				valJ2=2;
 			}
 			
 				
