@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Joueur {
@@ -111,14 +112,20 @@ public abstract class Joueur {
 
         //ajout d'un terrain dans la grille de zone
     public void majGrilleZone(int[] terrain, Coord c){
-        Coord[] autour = this.grilleZone.getCasesAutour(c);
+
+        Coord[] autour = this.getGrilleZone().getCasesAutour(c);
         Coord centre = new Coord(3,3);
         boolean terrainAutour = false; //si un terrain autour a ete trouve
+
         for(int i = 0;i < autour.length;i++){
+
             if(this.grilleZone.getCase(autour[i]) != null && autour[i] != centre) {
+
                 if (this.grilleZone.getCase(autour[i])[0] == terrain[0]) { //si le même type de terrain
                     System.out.println("zone trouvée");
+
                     if(! terrainAutour) {
+                        terrainAutour = true;   //dit qu'a déjà trouvé une zone
                         switch (terrain[0]) {
                             case (0):
                                 this.majChamps(this.grilleZone.getCase(autour[i])[1], terrain);
@@ -139,16 +146,19 @@ public abstract class Joueur {
                                 this.majMines(this.grilleZone.getCase(autour[i])[1], terrain);
                                 break;
                         }
-                        this.getGrilleZone().setCase(c, new int[]{terrain[0], this.grilleZone.getCase(autour[i])[1]}); //rempli grille zone ou le terrain est pose
+                    this.grilleZone.setCase(c, new int[]{terrain[0], this.grilleZone.getCase(autour[i])[1]}); //rempli grille zone ou le terrain est pose
                                                                                                                         //met le type du terrain et la zone a laquelle est rattache
-                        terrainAutour = true;   //dit qu'a déjà trouvé une zone
                     } else {
                         //a deja trouve un terrain et doit maintenant reunir deux zones
                         int indiceZone1 = this.grilleZone.getCase(c)[1];
                         int indiceZone2 = this.grilleZone.getCase((autour[i]))[1];
                         reunirZones(terrain[0],indiceZone1,indiceZone2);
                     }
+                } else {
+                    System.out.println("case autour non null mais pas bon terrain");
                 }
+            } else {
+                System.out.println("case autour null");
             }
         }   //si n'a pas trouvé de zone a laquelle rattacher le terrain
         if(! terrainAutour){
@@ -187,7 +197,7 @@ public abstract class Joueur {
                 default:
                     indice = -1;
             }
-            this.getGrilleZone().setCase(c, new int[]{terrain[0], indice}); //rempli grille zone ou le terrain est pose
+            this.grilleZone.setCase(c, new int[]{terrain[0], indice}); //rempli grille zone ou le terrain est pose
 
     }
 
@@ -404,11 +414,11 @@ public abstract class Joueur {
                 break;
         }
                 //mise a jour de la grille zone
-        for(int i = 0; i < this.getGrilleZone().getContenu().length; i++){
-            for(int j =0; j < this.getGrilleZone().getContenu()[i].length; j++){
-                if(this.getGrilleZone().getCase(new Coord(i,j)) != null) {
+        for(int i = 0; i < this.grilleZone.getContenu().length; i++){
+            for(int j =0; j < this.grilleZone.getContenu()[i].length; j++){
+                if(this.grilleZone.getCase(new Coord(i,j)) != null) {
                     //recupère le contenu de la case de coord ij si pas nulle
-                    int[] terrain = this.getGrilleZone().getCase(new Coord(i, j));
+                    int[] terrain = this.grilleZone.getCase(new Coord(i, j));
                     //vérifie que c'est le type de terrain des zones reliees
                     if (terrain[0] == typeTerrain) {
                                 //le deplace dans la zone qui absorbe si fait partie de la zone absorbee
@@ -430,27 +440,27 @@ public abstract class Joueur {
     public void afficheZones(){
         System.out.println("les champs");
         this.champs.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
         });
         System.out.println("les pres");
         this.pres.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
         });
         System.out.println("les lacs");
         this.lacs.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
         });
         System.out.println("les marais");
         this.marais.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
         });
         System.out.println("les forets");
         this.forets.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
         });
         System.out.println("les mines");
         this.mines.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
         });
     }
 }

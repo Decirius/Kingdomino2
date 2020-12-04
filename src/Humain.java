@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Humain extends Joueur {
 
@@ -38,6 +41,10 @@ public class Humain extends Joueur {
         //appele la methode recevoir tuile pour positionner la tuile
         boolean succes = this.grille.recevoirTuile(this.reservation[num], coord1, terrain1, coord2, terrain2);
         if(succes){
+            this.majGrilleZone(this.reservation[num].getTerrain1(), coord1);
+            this.majGrilleZone(this.reservation[num].getTerrain2(), coord2);
+            this.afficheZones();
+            this.calculScore();
             this.reservation[num] = null;
             return true;
         }

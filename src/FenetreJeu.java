@@ -514,8 +514,10 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	    
 		if(tempPartie.getTour()==1) {
 			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],coordSelected[0],terrain1, coordSelected[1],terrain2);
+			System.out.println("score humain : "+tempPartie.getJ1().getScore());
 		} else {
 			correct=tempPartie.getJ2().placerTuile(terrainSelected[0],coordSelected[0],terrain1, coordSelected[1],terrain2);
+			System.out.println("score humain : "+tempPartie.getJ2().getScore());
 		}
 		
 		terrainSelected = new int[2];
