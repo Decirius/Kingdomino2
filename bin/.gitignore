@@ -1,6 +1,3 @@
-/Coord.class
-/CoordonneeNonValideException.class
-/FenetreChoix.class
 /FenetreJeu$1.class
 /FenetreJeu$2.class
 /FenetreJeu$3.class
@@ -14,9 +11,4 @@
 /Joueur.class
 /Partie.class
 /Starter.class
-/Test.class
 /Tuile.class
-/FenetreChoix$1.class
-/FenetreChoix$2.class
-/FenetreChoix$3.class
-/FenetreChoix$4.class
