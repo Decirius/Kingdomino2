@@ -79,8 +79,8 @@ public class IaAleatoire extends Ia
             }
         } else {
             if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 2, emplacement[1], 1)) {
-                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[1]);
                 this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[0]);
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[1]);
 
                 afficheZones();
                 this.calculScore();
