@@ -73,6 +73,9 @@ public class Partie {
 			case (1):
 				this.j1 = new IaAleatoire(j1);
 				break;
+			case (2) :
+				this.j1 = new IaStandard(j1);
+				break;
 		}
 		switch (typeJoueur2) {
 			case (0):
@@ -80,6 +83,9 @@ public class Partie {
 				break;
 			case (1):
 				this.j2 = new IaAleatoire(j2);
+				break;
+			case (2) :
+				this.j2 = new IaStandard(j2);
 				break;
 		}
         melangerPile();
