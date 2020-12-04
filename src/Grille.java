@@ -84,7 +84,6 @@ public class Grille {
             return new Coord[]{new Coord(ligne - 1, colonne), new Coord(ligne + 1, colonne), new Coord(ligne, colonne - 1)};
         }
         else {
-        	System.out.println("der");
             return new Coord[] {new Coord(ligne + 1, colonne), new Coord(ligne - 1, colonne),
                     new Coord(ligne, colonne + 1), new Coord(ligne, colonne - 1)};
         }
