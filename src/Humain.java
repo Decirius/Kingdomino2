@@ -19,7 +19,6 @@ public class Humain extends Joueur {
             (coord1.getLigne() == coord2.getLigne() && coord2.getColonne() == (coord1.getColonne() - 1)) ||
             (coord1.getColonne() == coord2.getColonne() && coord1.getLigne() == (coord2.getLigne() - 1)) ||
             (coord1.getColonne() == coord2.getColonne() && coord2.getLigne() == (coord1.getLigne() - 1))) {
-                System.out.println("ok t'as bien positionne");
         } else {
                 System.out.println("terrains non adjacents");
                 return false;

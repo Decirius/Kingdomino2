@@ -29,36 +29,26 @@ public class IaAleatoire extends Ia
     public boolean placerTuile() {
 
         int tuile = Math.random() >= 0.5 ? 1 : 0;   //choisi une des tuiles reservees au hasard
-
         if (this.getReservation()[tuile] == null)   //si celle choisie est deja placee prend l'autre
             tuile = tuile == 0 ? 1 : 0;
-
         int terrain = Math.random() >= 0.5 ? 1 : 0; //choisi un des terrain de la tuile au hasard
 
         							//cherche a placer sa tuile
         int typeTerrain = terrain == 0 ? this.getReservation()[tuile].getTerrain1()[0] : this.getReservation()[tuile].getTerrain2()[0]; //recupere type du terrain choisi
-        System.out.println("type terrain : "+typeTerrain);
                                     //recupere les terrains qui rendent possible de jouer ce terrain de la tuile
         List<Coord> terrains = this.chercherTerrain(typeTerrain);   //listes des emplacements jouables
-        System.out.println("nombre de cases correspondantes"+terrains.size());
-
         List<Coord[]> places = new ArrayList<Coord[]>();
 
         if (!terrains.isEmpty()) { //si la liste n'est pas vide
             places = this.chercherPlace(terrains);  //cherche les emplacments jouables
-            System.out.println("positionnements jouables : "+places.size());
         }
 
         if (places.isEmpty()) {    //s'il n'y a pas d'emplacements jouables cherche sur l'autre terrain de la tuile
-            System.out.println("Cherche autre type de terrain");
             terrain = terrain == 0 ? 1 : 0;
             typeTerrain = terrain == 0 ? this.getReservation()[tuile].getTerrain1()[0] : this.getReservation()[tuile].getTerrain2()[0];
-            System.out.println("type terrain : "+typeTerrain);
             terrains = this.chercherTerrain(typeTerrain);
-            System.out.println("nombre de cases correspondantes "+terrains.size());
             if (!terrains.isEmpty()) {
                 places = this.chercherPlace(terrains);
-                System.out.println("positionnements jouables : "+places.size());
             }
         }
 
@@ -74,13 +64,19 @@ public class IaAleatoire extends Ia
         System.out.println("on va la placer sur "+emplacement[0].getLigne() + emplacement[0].getColonne()+" et "+emplacement[1].getLigne()+emplacement[1].getColonne());														//essaye de poser la tuile (normalement cela marche et renvoi true)
         if(terrain == 0) {
             if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 1, emplacement[1], 2)) {
-                System.out.println("on place");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[0]);
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[1]);
+                this.calculScore();
                 this.getReservation()[tuile] = null;    //retire de la reservation avant de renvoyer true
+                System.out.println("score"+ this.score);
                 return true;
             }
         } else {
             if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 2, emplacement[1], 1)) {
-                System.out.println("on place");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[1]);
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[0]);
+                this.calculScore();
+                System.out.println("score"+ this.score);
                 this.getReservation()[tuile] = null;    //retire de la reservation avant de renvoyer true
                 return true;
             }

@@ -210,11 +210,9 @@ public class Partie {
     	for (int i=0;i<4;i++) {
     	
     		if (this.tempOrdre[i]==1) {
-    			System.out.println("J1");
     			this.j1.setOrdreIndice(indice1,i);
     			indice1+=1;
     		} else {
-    			System.out.println("J2");
     			this.j2.setOrdreIndice(indice2,i);
     			indice2+=1;
     		}
