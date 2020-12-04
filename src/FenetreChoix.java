@@ -150,8 +150,8 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				
 			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),valJ1,valJ2);
 			FenetreJeu jeu = new FenetreJeu(partie);
-			jeu.setVisible(true);
 			this.setVisible(false);
+			jeu.setVisible(true);
 		}
 	}
 	

@@ -408,10 +408,10 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			break;
 		}
 		
-		//ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-		//executorService.scheduleAtFixedRate(, 0, 1, TimeUnit.SECONDS);
+		panel.removeAll();
+		setContentPane(buildContentPane());
 		
-		
+		JOptionPane.showMessageDialog(null, "Fin tour ia","Fin ia",JOptionPane.INFORMATION_MESSAGE);
 		finPhase();
 		
 	}
@@ -455,7 +455,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	
 	
 	public void finRound() {
-		System.out.println("fin round");
+		
 		
 		if (tempPartie.getRound()==12) {
 			

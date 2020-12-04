@@ -87,11 +87,19 @@ public class IaStandard extends Ia {
         
         for (int j=0;j<4;j++) {					// On prend le score le + haut
 	        if (tempOrdre[j]==0) {	
-        		if (scoreTuile[j]>=max) {
+        		if (scoreTuile[j]>max) {
 	        		reserved=j;
 	        		max=scoreTuile[j];
 	        	}
 	        }
+        }
+        int indice=0;
+        
+        while (reserved==-1) {					// si on a toujours pas réservé
+        	if (tempOrdre[indice]==0) {			// on prend la 1ere disponible	
+        		reserved=indice;
+        	}
+        	indice+=1;
         }
         
         this.setReservation(tirage[reserved]);
