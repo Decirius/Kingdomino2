@@ -20,7 +20,6 @@ public abstract class Ia extends Joueur {
             	if (this.getGrille().getCase(new Coord(i,j))!=null) {
                 				//stocke si c'est le meme terrain ou le centre de la grille
 	                if (this.getGrille().getCase(new Coord(i, j))[0] == terrain || this.getGrille().getCase(new Coord(i, j))[0] == -1) {
-	                	System.out.println("on a trouve 1 de plus");
 	                    liste.add(new Coord(i, j));
 	                }
             	}
@@ -39,14 +38,11 @@ public abstract class Ia extends Joueur {
     public List<Coord[]> chercherPlace(List<Coord> terrains) {
         List<Coord[]> places = new ArrayList<Coord[]>();
         terrains.forEach(terrain -> {
-        	
-        	System.out.println("foreach");
-            				//les cases vides autour du terrain
-            Coord[] cases = this.getGrille().getCasesAutour(terrain);
+
+            Coord[] cases = this.getGrille().getCasesAutour(terrain);   //les cases vides autour du terrain
             for (int i = 0; i < cases.length; i++) {
                 			//les cases vides autour de la case vide (cherche les espaces a peut mettre une tuile)
             	if (this.getGrille().getCase(cases[i])==null) {
-            		System.out.println("j'ai trouve une case");
 	                Coord[] cases2 = this.getGrille().getCasesAutour(cases[i]);
 	                for (int j = 0; j < cases2.length; j++) {
 	                    		//si la case autour de la case vide est aussi vide, ajoute a la liste
