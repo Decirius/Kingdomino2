@@ -67,24 +67,27 @@ public class IaAleatoire extends Ia
         														//essaye de poser la tuile (normalement cela marche et renvoi true)
         if(terrain == 0) {
             if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 1, emplacement[1], 2)) {
-
+            	System.out.println("---------- Terrain 1 -------------");
                 this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[0]);
+                System.out.println("---------- Terrain 2 -------------");
                 this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[1]);
 
                 afficheZones();
                 this.calculScore();
-                System.out.println("score"+ this.score);
+                System.out.println("score ia : "+ this.score);
                 this.getReservation()[tuile] = null;    //retire de la reservation avant de renvoyer true
                 return true;
             }
         } else {
             if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 2, emplacement[1], 1)) {
-                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[1]);
+            	System.out.println("---------- Terrain 1 -------------");
                 this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[0]);
+                System.out.println("---------- Terrain 2 -------------");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[1]);
 
                 afficheZones();
                 this.calculScore();
-                System.out.println("score"+ this.score);
+                System.out.println("score ia : "+ this.score);
                 this.getReservation()[tuile] = null;    //retire de la reservation avant de renvoyer true
                 return true;
             }

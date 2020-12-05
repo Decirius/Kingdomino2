@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Joueur {
@@ -109,47 +110,86 @@ public abstract class Joueur {
     }
 
 
+    public void afficherGrilleZone() {
+
+    	System.out.println("_______GrilleZone____");
+    	for (int i=0;i<7;i++) {
+    		String ligne = "";
+    		for (int j=0;j<7;j++) {
+    			if (this.getGrilleZone().getCase(new Coord(i,j))!=null) {
+    				ligne = ligne +"  ["+ this.getGrilleZone().getCase(new Coord(i,j))[0] +this.getGrilleZone().getCase(new Coord(i,j))[1]+"]";
+    			} else {
+    				ligne = ligne + "  [99]";
+    			}
+    		}
+    		System.out.println(ligne);
+    	}
+
+    }
+
         //ajout d'un terrain dans la grille de zone
     public void majGrilleZone(int[] terrain, Coord c){
-    	
-        Coord[] autour = this.grilleZone.getCasesAutour(c);
+
+        Coord[] autour = this.getGrilleZone().getCasesAutour(c);
         Coord centre = new Coord(3,3);
         boolean terrainAutour = false; //si un terrain autour a ete trouve
+
         for(int i = 0;i < autour.length;i++){
+
             if(this.grilleZone.getCase(autour[i]) != null && autour[i] != centre) {
-                if (this.grilleZone.getCase(autour[i])[0] == terrain[0]) { //si le même type de terrain
-                    switch (terrain[0]) {
-                        case (0):
-                            this.majChamps(this.grilleZone.getCase(autour[i])[1], terrain);
-                            break;
-                        case (1):
-                            this.majPres(this.grilleZone.getCase(autour[i])[1], terrain);
-                            break;
-                        case (2):
-                            this.majLacs(this.grilleZone.getCase(autour[i])[1], terrain);
-                            break;
-                        case (3):
-                            this.majMarais(this.grilleZone.getCase(autour[i])[1], terrain);
-                            break;
-                        case (4):
-                            this.majForets(this.grilleZone.getCase(autour[i])[1], terrain);
-                            break;
-                        case (5):
-                            this.majMines(this.grilleZone.getCase(autour[i])[1], terrain);
-                            break;
+
+                if (this.grilleZone.getCase(autour[i])[0] == terrain[0]) { //si le meme type de terrain
+                    System.out.println("- zone trouvee");
+
+                    if(! terrainAutour) {
+                        terrainAutour = true;   //dit qu'a déjà trouvé une zone
+                        switch (terrain[0]) {
+                            case (0):
+                                this.majChamps(this.grilleZone.getCase(autour[i])[1], terrain);
+                                break;
+                            case (1):
+                                this.majPres(this.grilleZone.getCase(autour[i])[1], terrain);
+                                break;
+                            case (2):
+                                this.majLacs(this.grilleZone.getCase(autour[i])[1], terrain);
+                                break;
+                            case (3):
+                                this.majMarais(this.grilleZone.getCase(autour[i])[1], terrain);
+                                break;
+                            case (4):
+                                this.majForets(this.grilleZone.getCase(autour[i])[1], terrain);
+                                break;
+                            case (5):
+                                this.majMines(this.grilleZone.getCase(autour[i])[1], terrain);
+                                break;
+                        }
+                    this.grilleZone.setCase(c, new int[]{terrain[0], this.grilleZone.getCase(autour[i])[1]}); //rempli grille zone ou le terrain est pose
+                                                                                                                        //met le type du terrain et la zone a laquelle est rattache
+                    } else {
+                        //a deja trouve un terrain et doit maintenant reunir deux zones
+                        if(this.getGrilleZone().getCase(autour[i])[1] != this.grilleZone.getCase(c)[1]) {
+                            int indiceZone1 = this.grilleZone.getCase(c)[1];
+                            int indiceZone2 = this.grilleZone.getCase((autour[i]))[1];
+                            reunirZones(terrain[0], indiceZone1, indiceZone2);
+                        } else {
+                            System.out.println("terrain de même type mais dans la même zone");
+                        }
                     }
-                    terrainAutour = true;
-                    this.getGrilleZone().setCase(c, new int[]{terrain[0], this.grilleZone.getCase(autour[i])[1]}); //rempli grille zone ou le terrain est pose
-                        //met le type du terrain et la zone a laquelle est rattache
+                } else {
+                    System.out.println("- case autour non null mais pas bon terrain");
                 }
+            } else {
+                System.out.println("- case autour null");
             }
         }   //si n'a pas trouvé de zone a laquelle rattacher le terrain
         if(! terrainAutour){
         	System.out.println("cree zone");
             creerZone(terrain, c);
         }
+        afficherGrilleZone();
     }
     public void creerZone(int[] terrain, Coord c){
+        System.out.println("- creation d'une zone pour la coord"+c.getLigne()+c.getColonne());
             //si ne rejoint pas une zone doit la creer
             int indice;
             switch (terrain[0]) {
@@ -180,7 +220,7 @@ public abstract class Joueur {
                 default:
                     indice = -1;
             }
-            this.getGrilleZone().setCase(c, new int[]{terrain[0], indice}); //rempli grille zone ou le terrain est pose
+            this.grilleZone.setCase(c, new int[]{terrain[0], indice}); //rempli grille zone ou le terrain est pose
 
     }
 
@@ -311,9 +351,7 @@ public abstract class Joueur {
 	}
 
     public void defausser(int num){
-    	
-    	System.out.println("defausse");
-    	
+
         int i = 0;
         				//s'arrete quand est arrivee sur le premier emplacement vide de la défausse
         for (; this.defausse[i] != null; i++) {
@@ -327,10 +365,107 @@ public abstract class Joueur {
 
     public abstract boolean placerTuile(int num, Coord coord1, int terrrain1, Coord coord2, int terrain2);
 
+    public void reunirZones(int typeTerrain, int indiceZone1, int indiceZone2){
+
+    	System.out.println("reunir deux zones");
+
+        int nbZones = -1;
+        int[] changee;
+        int[] detruite;
+        int petit;
+        int grand;
+        if(indiceZone1 >= indiceZone2){
+            petit = indiceZone2;
+            grand = indiceZone1;
+        } else {
+            petit = indiceZone1;
+            grand = indiceZone2;
+        }
+        switch (typeTerrain) {
+            case (0):
+                nbZones = this.champs.size();
+                detruite = this.champs.get(grand);
+                changee = this.champs.get(petit);
+                changee[0] = changee[0] + detruite[0];
+                changee[1] = changee[1] + detruite[1];
+                this.champs.set(petit, changee);
+                this.champs.remove(grand);
+                break;
+            case (1):
+                nbZones = this.pres.size();
+                detruite = this.pres.get(grand);
+                changee = this.pres.get(petit);
+                changee[0] = changee[0] + detruite[0];
+                changee[1] = changee[1] + detruite[1];
+                this.pres.set(petit, changee);
+                this.pres.remove(grand);
+                break;
+            case (2):
+                nbZones = this.lacs.size();
+                detruite = this.lacs.get(grand);
+                changee = this.lacs.get(petit);
+                changee[0] = changee[0] + detruite[0];
+                changee[1] = changee[1] + detruite[1];
+                this.lacs.set(petit, changee);
+                this.lacs.remove(grand);
+                break;
+            case (3):
+                nbZones = this.marais.size();
+                detruite = this.marais.get(grand);
+                changee = this.marais.get(petit);
+                changee[0] = changee[0] + detruite[0];
+                changee[1] = changee[1] + detruite[1];
+                this.marais.set(petit, changee);
+                this.marais.remove(grand);
+                break;
+            case (4):
+                nbZones = this.forets.size();
+                detruite = this.forets.get(grand);
+                changee = this.forets.get(petit);
+                changee[0] = changee[0] + detruite[0];
+                changee[1] = changee[1] + detruite[1];
+                this.forets.set(petit, changee);
+                this.forets.remove(grand);
+                break;
+            case (5):
+                nbZones = this.mines.size();
+                detruite = this.mines.get(grand);
+                changee = this.mines.get(petit);
+                changee[0] = changee[0] + detruite[0];
+                changee[1] = changee[1] + detruite[1];
+                this.mines.set(petit, changee);
+                this.mines.remove(grand);
+                break;
+        }
+                //mise a jour de la grille zone
+        for(int i = 0; i < this.grilleZone.getContenu().length; i++){
+            for(int j =0; j < this.grilleZone.getContenu()[i].length; j++){
+                if(this.grilleZone.getCase(new Coord(i,j)) != null) {
+                    //recupère le contenu de la case de coord ij si pas nulle
+                    int[] terrain = this.grilleZone.getCase(new Coord(i, j));
+                    //vérifie que c'est le type de terrain des zones reliees
+                    if (terrain[0] == typeTerrain) {
+                                //le deplace dans la zone qui absorbe si fait partie de la zone absorbee
+                        if (terrain[1] == grand) {
+                            this.grilleZone.setCase(new Coord(i, j), new int[]{typeTerrain, petit});
+                        }
+                        if (terrain[1] > grand) {
+                                //reduit l'indice s'il etait dans un zone apres celle supprimee
+                            this.grilleZone.setCase(new Coord(i, j), new int[]{typeTerrain, (terrain[1] - 1)});
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+
     public void afficheZones(){
-        System.out.println("les champs");
+        System.out.println("=> Les champs");
         this.champs.forEach(c -> {
             System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
+            ;
         });
         System.out.println("les pres");
         this.pres.forEach(c -> {
