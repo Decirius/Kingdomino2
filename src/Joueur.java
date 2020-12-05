@@ -139,7 +139,6 @@ public abstract class Joueur {
             if(this.grilleZone.getCase(autour[i]) != null && autour[i] != centre) {
 
                 if (this.grilleZone.getCase(autour[i])[0] == terrain[0]) { //si le meme type de terrain
-                    System.out.println("- zone trouvee");
 
                     if(! terrainAutour) {
                         terrainAutour = true;   //dit qu'a déjà trouvé une zone

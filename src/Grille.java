@@ -119,5 +119,16 @@ public class Grille {
         return false;
     }
     
+    public boolean grilleComplete() {
+    	for (int i=0;i<7;i++) {
+    		for (int j=0;j<7;j++) {
+    			if (this.getCase(new Coord(i,j))==null) {
+    				return false;
+    			}
+    		}
+    	} 
+    	return true;
+    }
+    
 
 }
