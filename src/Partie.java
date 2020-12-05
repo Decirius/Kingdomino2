@@ -61,11 +61,12 @@ public class Partie {
     private int round; 					// Variant de 1 a 12
     private int[] tempOrdre;			// ordre pour le Round prochain
     private int[] ordreActuel;			// ordre pour le Round courant
+    private boolean modePopup;
 
 
 
 	//type joueur 0 pour humain, 1 pour iaAleatoire
-    public Partie(String j1, String j2, int typeJoueur1, int typeJoueur2){
+    public Partie(String j1, String j2, int typeJoueur1, int typeJoueur2, boolean mode){
     	switch (typeJoueur1) {
 			case (0):
 				this.j1 = new Humain(j1);
@@ -98,6 +99,7 @@ public class Partie {
         this.j1.setOrdre(new int[] {1,3});
         this.j2.setOrdre(new int[] {2,4});
         this.ordreActuel=new int[] {1,2,1,2};
+        this.modePopup=mode;
     }
 
     public void melangerPile(){
@@ -227,6 +229,25 @@ public class Partie {
     	
     	this.ordreActuel=this.tempOrdre;
     	initTempOrdre();
+    }
+    
+    public void finPartie() {
+    	
+    	this.getJ1().calculScore();
+    	this.getJ2().calculScore();
+    	
+    	if (this.getJ1().getGrille().grilleComplete()) {
+    		this.getJ1().setScore(this.getJ1().getScore()+10);
+    	}
+    	if (this.getJ2().getGrille().grilleComplete()) {
+    		this.getJ2().setScore(this.getJ2().getScore()+10);
+    	}
+    	
+    	
+    }
+    
+    public boolean getModePopup() {
+    	return this.modePopup;
     }
 
     

@@ -58,13 +58,26 @@ public class IaStandard extends Ia {
 	   														//essaye de poser la tuile (normalement cela marche et renvoi true)
 	    if(terrain == 0) {
 	        if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 1, emplacement[1], 2)) {
+	        	System.out.println("---------- Terrain 1 -------------");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[0]);
+                System.out.println("---------- Terrain 2 -------------");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[1]);
 
+                afficheZones();
+                this.calculScore();
+                System.out.println("score ia : "+ this.score);
 	            this.getReservation()[tuile] = null;    //retire de la reservation avant de renvoyer true
 	            return true;
 	        }
 	    } else {
 	        if (this.getGrille().recevoirTuile(this.getReservation()[tuile], emplacement[0], 2, emplacement[1], 1)) {
+	        	System.out.println("---------- Terrain 1 -------------");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain2(), emplacement[0]);
+                System.out.println("---------- Terrain 2 -------------");
+                this.majGrilleZone(this.getReservation()[tuile].getTerrain1(), emplacement[1]);
 
+                afficheZones();
+                this.calculScore();
 	            this.getReservation()[tuile] = null;    //retire de la reservation avant de renvoyer true
 	            return true;
 	        }
@@ -119,9 +132,11 @@ public class IaStandard extends Ia {
 					if (this.getGrille().getCase(coord)[0]==t.getTerrain1()[0]) {
 						scoreT1+=1;
 					}
+					scoreT1=scoreT1+(this.getGrille().getCase(coord)[1]*5);
 					if (this.getGrille().getCase(coord)[0]==t.getTerrain2()[0]) {
 						scoreT2+=1;
 					}
+					scoreT2=scoreT1+(this.getGrille().getCase(coord)[1]*5);
 				}
 			}
 		}

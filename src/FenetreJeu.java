@@ -42,8 +42,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		setJMenuBar(buildMenu());
 		setVisible(true);			
 		
-		
-		JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
+		if (tempPartie.getModePopup()) {
+			JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
 		debutTour();
 	}
@@ -308,7 +309,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(defausse)) {
 			defausseActive=true;
-			JOptionPane.showMessageDialog(null, "<html>Choisissez la tuile a defausser.</html>","Defausse", JOptionPane.INFORMATION_MESSAGE);
+			if (tempPartie.getModePopup()) {
+				JOptionPane.showMessageDialog(null, "<html>Choisissez la tuile a defausser.</html>","Defausse", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		
 	}
@@ -363,8 +366,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				text2="None";
 				break;
 		}
-		
-		JOptionPane.showMessageDialog(null, text1+text2,"Tour de jeu", JOptionPane.INFORMATION_MESSAGE);
+		if (tempPartie.getModePopup()) {
+			JOptionPane.showMessageDialog(null, text1+text2,"Tour de jeu", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	public void tourIa(int idJ) {
@@ -405,8 +409,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		
 		panel.removeAll();
 		setContentPane(buildContentPane());
-		
-		JOptionPane.showMessageDialog(null, "Fin tour ia","Fin ia",JOptionPane.INFORMATION_MESSAGE);
+		if (tempPartie.getModePopup()) {
+			JOptionPane.showMessageDialog(null, "Fin tour ia","Fin ia",JOptionPane.INFORMATION_MESSAGE);
+		}
 		finPhase();
 		
 	}
@@ -457,7 +462,12 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			panel.removeAll();
 			setContentPane(buildContentPane());
 			
-			JOptionPane.showMessageDialog(null, "Partie finie","Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+			
+			JOptionPane.showMessageDialog(null, "<html>Partie finie"
+					+ "<br><br>Score "+tempPartie.getJ1().getNom()+" : "+tempPartie.getJ1().getScore()
+					+ "<br><br>Score "+tempPartie.getJ2().getNom()+" : "+tempPartie.getJ2().getScore()
+					+ "</html>","Fin de partie",JOptionPane.INFORMATION_MESSAGE);
+			
 			// afficher le score, clap clap bravo
 			
 		} else {
@@ -482,7 +492,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	public void verif() {
 		
 		if (this.tempPartie.verifChoixTuile(this.tuileSelected)==true) {
-			JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est deja reservee.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+			if (tempPartie.getModePopup()) {
+				JOptionPane.showMessageDialog(null, "<html>Erreur.<br><br>Cette tuile est deja reservee.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		else {			
 			this.tempPartie.setTempOrdreIndice(this.tuileSelected, this.tempPartie.getTour());
@@ -524,7 +536,9 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		if (correct) {
 			finPhase();
 		} else {
-			JOptionPane.showMessageDialog(null, "<html>Erreur lors du positionnement.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+			if (tempPartie.getModePopup()) {
+				JOptionPane.showMessageDialog(null, "<html>Erreur lors du positionnement.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		
 	}
