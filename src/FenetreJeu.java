@@ -518,7 +518,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			System.out.println("score humain : "+tempPartie.getJ2().getScore());
 		}
 		
-		terrainSelected = new int[2];
+		terrainSelected = null;
 		coordSelected = new Coord[2];
 		
 		if (correct) {
