@@ -102,6 +102,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				}
 			
 			}
+			
 		} else {
 			defausse = new JButton("Defausser");
 			defausse.addActionListener(this);
@@ -225,7 +226,6 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				public void mouseClicked(MouseEvent e) {
 					terrainSelected=new int[] {indice,1};
 					if (defausseActive) {
-						System.out.println("on defausse");
 						defausser();
 					}
 				}
@@ -235,7 +235,6 @@ public class FenetreJeu extends JFrame implements ActionListener {
 				public void mouseClicked(MouseEvent e) {
 					terrainSelected=new int[] {indice,2};
 					if (defausseActive) {
-						System.out.println("on defausse");
 						defausser();
 					}
 				}
@@ -321,18 +320,14 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	
 		if (tempPartie.getTour()==1) {
 			if (tempPartie.getJ1() instanceof Ia ) {
-				System.out.println("ia");
 				tourIa(1);
 			} else {
-				System.out.println("humain");
 				tourHumain(1);
 			}
 		} else {
 			if (tempPartie.getJ2() instanceof Ia) {
-				System.out.println("ia");
 				tourIa(2);
 			} else {
-				System.out.println("humain");
 				tourHumain(2);
 			}
 		}
@@ -421,7 +416,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			case 1:
 			case 2:
 			case 3:
-				System.out.println("Fin du tour de : "+tempPartie.getTour());
+				
 				if (tempPartie.getOrdreActuel()[tempPartie.getPhase()]==1) {
 					tempPartie.setTour(1);
 				} else {
@@ -444,7 +439,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		if (tempPartie.getPhase()==8) {
 			finRound();
 		} else {
-			System.out.println("fin de phase" + tempPartie.getPhase());
+			
 			tempPartie.setPhase(tempPartie.getPhase()+1);
 			panel.removeAll();
 			setContentPane(buildContentPane());
@@ -501,9 +496,6 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		int terrain1=0;
 		int terrain2=0;
 		
-		System.out.println("1 : Ligne "+coordSelected[0].getLigne()+", colonne :"+coordSelected[0].getColonne());
-	    System.out.println("2 : Ligne "+coordSelected[1].getLigne()+", colonne :"+coordSelected[1].getColonne());
-		
 	    if (terrainSelected[1]==1) {
 	    	terrain1=1;
 	    	terrain2=2;
@@ -511,6 +503,12 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	    	terrain1=2;
 	    	terrain2=1;
 	    }
+	    
+	    System.out.println("------------------------positionne()--------------------");
+	    System.out.println("Tuile choisie : "+terrainSelected[0]);
+	    System.out.println("1er terrain choisi : " + terrain1 + " aux coordonnees "+coordSelected[0].getLigne()+coordSelected[0].getColonne());
+	    System.out.println("2nd terrain choisi : " + terrain2 + " aux coordonnees "+coordSelected[1].getLigne()+coordSelected[1].getColonne());
+	    
 	    
 		if(tempPartie.getTour()==1) {
 			correct=tempPartie.getJ1().placerTuile(terrainSelected[0],coordSelected[0],terrain1, coordSelected[1],terrain2);
@@ -524,12 +522,10 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		coordSelected = new Coord[2];
 		
 		if (correct) {
-			System.out.println("WAOUH");
 			finPhase();
 		} else {
-			System.out.println("aie...");
+			JOptionPane.showMessageDialog(null, "<html>Erreur lors du positionnement.</html>","Erreur", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
 		
 	}
 	

@@ -109,6 +109,23 @@ public abstract class Joueur {
         return champs;
     }
 
+    
+    public void afficherGrilleZone() {
+    	
+    	System.out.println("_______GrilleZone____");
+    	for (int i=0;i<7;i++) {
+    		String ligne = "";
+    		for (int j=0;j<7;j++) {
+    			if (this.getGrilleZone().getCase(new Coord(i,j))!=null) {
+    				ligne = ligne +"  ["+ this.getGrilleZone().getCase(new Coord(i,j))[0] +this.getGrilleZone().getCase(new Coord(i,j))[1]+"]";
+    			} else {
+    				ligne = ligne + "  [99]";
+    			}
+    		}
+    		System.out.println(ligne);
+    	}
+    	 
+    }
 
         //ajout d'un terrain dans la grille de zone
     public void majGrilleZone(int[] terrain, Coord c){
@@ -121,8 +138,8 @@ public abstract class Joueur {
 
             if(this.grilleZone.getCase(autour[i]) != null && autour[i] != centre) {
 
-                if (this.grilleZone.getCase(autour[i])[0] == terrain[0]) { //si le même type de terrain
-                    System.out.println("zone trouvée");
+                if (this.grilleZone.getCase(autour[i])[0] == terrain[0]) { //si le meme type de terrain
+                    System.out.println("- zone trouvee");
 
                     if(! terrainAutour) {
                         terrainAutour = true;   //dit qu'a déjà trouvé une zone
@@ -155,18 +172,19 @@ public abstract class Joueur {
                         reunirZones(terrain[0],indiceZone1,indiceZone2);
                     }
                 } else {
-                    System.out.println("case autour non null mais pas bon terrain");
+                    System.out.println("- case autour non null mais pas bon terrain");
                 }
             } else {
-                System.out.println("case autour null");
+                System.out.println("- case autour null");
             }
         }   //si n'a pas trouvé de zone a laquelle rattacher le terrain
         if(! terrainAutour){
             creerZone(terrain, c);
         }
+        afficherGrilleZone();
     }
     public void creerZone(int[] terrain, Coord c){
-        System.out.println("creation d'une zone pour la coord"+c.getLigne()+c.getColonne());
+        System.out.println("- creation d'une zone pour la coord"+c.getLigne()+c.getColonne());
             //si ne rejoint pas une zone doit la creer
             int indice;
             switch (terrain[0]) {
@@ -329,8 +347,6 @@ public abstract class Joueur {
 
     public void defausser(int num){
     	
-    	System.out.println("defausse");
-    	
         int i = 0;
         				//s'arrete quand est arrivee sur le premier emplacement vide de la défausse
         for (; this.defausse[i] != null; i++) {
@@ -345,6 +361,9 @@ public abstract class Joueur {
     public abstract boolean placerTuile(int num, Coord coord1, int terrrain1, Coord coord2, int terrain2);
 
     public void reunirZones(int typeTerrain, int indiceZone1, int indiceZone2){
+    	
+    	System.out.println("reunir deux zones");
+    	
         int nbZones = -1;
         int[] changee;
         int[] detruite;
@@ -438,29 +457,29 @@ public abstract class Joueur {
 
 
     public void afficheZones(){
-        System.out.println("les champs");
+        System.out.println("=> Les champs");
         this.champs.forEach(c -> {
-            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" couronnes)");
         });
-        System.out.println("les pres");
+        System.out.println("=> Les pres");
         this.pres.forEach(c -> {
-            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" couronnes)");
         });
-        System.out.println("les lacs");
+        System.out.println("=> Les lacs");
         this.lacs.forEach(c -> {
-            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" couronnes)");
         });
-        System.out.println("les marais");
+        System.out.println("=> Les marais");
         this.marais.forEach(c -> {
-            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" couronnes)");
         });
-        System.out.println("les forets");
+        System.out.println("=> Les forets");
         this.forets.forEach(c -> {
-            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" couronnes)");
         });
-        System.out.println("les mines");
+        System.out.println("=> Les mines");
         this.mines.forEach(c -> {
-            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille "+c[0]+" et avec "+c[1]+" couronnes)");
         });
     }
 }
