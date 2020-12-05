@@ -167,9 +167,13 @@ public abstract class Joueur {
                                                                                                                         //met le type du terrain et la zone a laquelle est rattache
                     } else {
                         //a deja trouve un terrain et doit maintenant reunir deux zones
-                        int indiceZone1 = this.grilleZone.getCase(c)[1];
-                        int indiceZone2 = this.grilleZone.getCase((autour[i]))[1];
-                        reunirZones(terrain[0],indiceZone1,indiceZone2);
+                        if(this.getGrilleZone().getCase(autour[1])[1] != this.grilleZone.getCase(c)[1]) {
+                            int indiceZone1 = this.grilleZone.getCase(c)[1];
+                            int indiceZone2 = this.grilleZone.getCase((autour[i]))[1];
+                            reunirZones(terrain[0], indiceZone1, indiceZone2);
+                        } else {
+                            System.out.println("terrain de même type mais dans la même zone");
+                        }
                     }
                 } else {
                     System.out.println("- case autour non null mais pas bon terrain");
