@@ -12,9 +12,11 @@ public class FenetreChoix extends JFrame implements ActionListener {
 	TextField choixnom;
 	TextField choixnom2;
 	JRadioButton choixHumain;
-	JRadioButton choixIa;
+	JRadioButton choixIaAleatoire;
+	JRadioButton choixIaStandard;
 	JRadioButton choix2Humain ;
-	JRadioButton choix2Ia ;
+	JRadioButton choix2IaAleatoire ;
+	JRadioButton choix2IaStandard;
 	
 	
 	public FenetreChoix() {
@@ -63,14 +65,24 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		choixnom2.setColumns(10);
 		
 		choixHumain = new JRadioButton ("Humain",true);
-		choixIa = new JRadioButton ("IA");
+		choixIaAleatoire = new JRadioButton ("IA Aleatoire");
+		choixIaStandard = new JRadioButton ("IA Standard");
+		
 		choixHumain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				choixIa.setSelected(false);
+				choixIaAleatoire.setSelected(false);
+				choixIaStandard.setSelected(false);
 			}
 		});
-		choixIa.addActionListener(new ActionListener() {
+		choixIaAleatoire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				choixHumain.setSelected(false);
+				choixIaStandard.setSelected(false);
+			}
+		});
+		choixIaStandard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choixIaAleatoire.setSelected(false);
 				choixHumain.setSelected(false);
 			}
 		});
@@ -78,16 +90,25 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		
 		
 		choix2Humain = new JRadioButton("Humain",true);
+		choix2IaAleatoire = new JRadioButton ("IA Aleatoire");
+		choix2IaStandard = new JRadioButton ("IA Standard");
 		
-		choix2Ia = new JRadioButton ("IA");
 		choix2Humain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				choix2Ia.setSelected(false);
+				choix2IaAleatoire.setSelected(false);
+				choix2IaStandard.setSelected(false);
 			}
 		});
-		choix2Ia.addActionListener(new ActionListener() {
+		choix2IaAleatoire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				choix2Humain.setSelected(false);
+				choix2IaStandard.setSelected(false);
+			}
+		});
+		choix2IaStandard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choix2Humain.setSelected(false);
+				choix2IaAleatoire.setSelected(false);
 			}
 		});
 		
@@ -106,9 +127,11 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		panelMilieu.add(panelTxtg);
 		panelMilieu.add(panelTxtd);
 		panelCg.add(choixHumain);
-		panelCg.add(choixIa);
+		panelCg.add(choixIaStandard);
+		panelCg.add(choixIaAleatoire);
 		panelCd.add(choix2Humain);
-		panelCd.add(choix2Ia);
+		panelCd.add(choix2IaStandard);
+		panelCd.add(choix2IaAleatoire);
 		panelBas.add(panelCg);
 		panelBas.add(panelCd);
 		panelBouton.add(boutonValider);
@@ -136,17 +159,21 @@ public class FenetreChoix extends JFrame implements ActionListener {
 			
 			if (choixHumain.isSelected()) {
 				valJ1=0;
-			} else if (choixIa.isSelected()) {
+			} else if (choixIaAleatoire.isSelected()) {
 				valJ1=1;
+			} else if (choixIaStandard.isSelected()) {
+				valJ1=2;
 			}
 			
 			if (choix2Humain.isSelected()) {
 				valJ2=0;
-			} else if (choix2Ia.isSelected()) {
+			} else if (choix2IaAleatoire.isSelected()) {
 				valJ2=1;
+			} else if (choix2IaStandard.isSelected()) {
+				valJ2=2;
 			}
 			
-				
+			JOptionPane.showConfirmDialog(this, ""+valJ1+" "+valJ2);
 				
 			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),valJ1,valJ2);
 			FenetreJeu jeu = new FenetreJeu(partie);

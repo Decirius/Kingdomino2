@@ -111,6 +111,7 @@ public abstract class Joueur {
 
         //ajout d'un terrain dans la grille de zone
     public void majGrilleZone(int[] terrain, Coord c){
+    	
         Coord[] autour = this.grilleZone.getCasesAutour(c);
         Coord centre = new Coord(3,3);
         boolean terrainAutour = false; //si un terrain autour a ete trouve
@@ -144,6 +145,7 @@ public abstract class Joueur {
             }
         }   //si n'a pas trouvé de zone a laquelle rattacher le terrain
         if(! terrainAutour){
+        	System.out.println("cree zone");
             creerZone(terrain, c);
         }
     }
@@ -286,7 +288,7 @@ public abstract class Joueur {
     }
 
     public void majMines(int indice, int[] mine) {
-        int [] zone = this.pres.get(indice);
+        int [] zone = this.mines.get(indice);
         zone[0] = zone[0] + 1;  //rajoute 1 à la taille de la zone
         zone[1] = zone[1] + mine[1];  //ajoute le nombre de courrones apportées par le terrain
         this.mines.set(indice, zone);
@@ -328,27 +330,27 @@ public abstract class Joueur {
     public void afficheZones(){
         System.out.println("les champs");
         this.champs.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
         });
         System.out.println("les pres");
         this.pres.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
         });
         System.out.println("les lacs");
         this.lacs.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
         });
         System.out.println("les marais");
         this.marais.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
         });
         System.out.println("les forets");
         this.forets.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
         });
         System.out.println("les mines");
         this.mines.forEach(c -> {
-            System.out.println("zone de taile"+c[0]+" et avec "+c[1]+" courrones)");
+            System.out.println("zone de taille"+c[0]+" et avec "+c[1]+" couronnes)");
         });
     }
 }
