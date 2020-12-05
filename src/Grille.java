@@ -58,7 +58,6 @@ public class Grille {
       
         if (ligne == 0 && colonne == 0) {
             return new Coord[]{new Coord(ligne + 1, colonne), new Coord(ligne, colonne + 1)};
-
         }
         if (ligne == 0 && colonne == 6) {
             return new Coord[]{new Coord(ligne + 1, colonne), new Coord(ligne, colonne - 1)};
@@ -89,8 +88,16 @@ public class Grille {
 
     //retourne false et ne fait rien si c'est impossible de placer la tuile sur les coordonnées données
     public boolean recevoirTuile(Tuile tuile, Coord coord1, int terrain1, Coord coord2, int terrain2) {
-
+    						// la tuile			coord  & indice 1er terrain      coord & indice 2n terrain
+    	
+    	System.out.println("----------------------------recevoirTuile()----------------------");
+    	System.out.println("id tuile : "+tuile.getId());
+	    
         if(terrain1 == 1){
+        	
+        	System.out.println("terrain1 :" + tuile.getTerrain1()[0]  +" aux coordonnees "+coord1.getLigne()+coord1.getColonne());
+    	    System.out.println("terrain2 : " + tuile.getTerrain2()[0] + " aux coordonnees "+coord2.getLigne()+coord2.getColonne());
+        	
             if(this.verifieValidite(coord1,tuile.getTerrain1()) || this.verifieValidite(coord2, tuile.getTerrain2())){
                 this.setCase(coord1, tuile.getTerrain1());
                 this.setCase(coord2, tuile.getTerrain2());
@@ -99,7 +106,10 @@ public class Grille {
         return false;
         }
         if(terrain1 ==2){
-            if(this.verifieValidite(coord2,tuile.getTerrain1()) || this.verifieValidite(coord1, tuile.getTerrain2())){
+        	System.out.println("terrain1 " + tuile.getTerrain2()[0]  +" aux coordonnees "+coord1.getLigne()+coord1.getColonne());
+    	    System.out.println("terrain2 : " + tuile.getTerrain1()[0]+ " aux coordonnees "+coord2.getLigne()+coord2.getColonne());
+    	    
+	        if(this.verifieValidite(coord2,tuile.getTerrain1()) || this.verifieValidite(coord1, tuile.getTerrain2())){
                 this.setCase(coord2, tuile.getTerrain1());
                 this.setCase(coord1, tuile.getTerrain2());
                 return true;
@@ -107,19 +117,6 @@ public class Grille {
             return false;
         }
         return false;
-    }
-
-
- 
-    public static void main(String[] args) {
-    Grille grille = new Grille();
-    System.out.println(Arrays.deepToString(grille.getContenu()));
-    Coord coordMilieu = new Coord(3,3);
-    System.out.println(Arrays.toString(grille.getCase(coordMilieu)));
-    Coord coord = new Coord(2,3);
-    grille.setCase(coord, new int[] {2,1});
-    System.out.println(grille.estLibre(coord));
-    System.out.println(Arrays.deepToString(grille.getContenu()));
     }
     
 

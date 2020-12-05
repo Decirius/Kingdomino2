@@ -37,6 +37,7 @@ public abstract class Ia extends Joueur {
 						    //la premiere coordonnee est celle a mettre pres du terrain
     public List<Coord[]> chercherPlace(List<Coord> terrains) {
         List<Coord[]> places = new ArrayList<Coord[]>();
+        
         terrains.forEach(terrain -> {
 
             Coord[] cases = this.getGrille().getCasesAutour(terrain);   //les cases vides autour du terrain
