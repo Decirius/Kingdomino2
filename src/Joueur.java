@@ -171,24 +171,24 @@ public abstract class Joueur {
                             int indiceZone2 = this.grilleZone.getCase((autour[i]))[1];
                             reunirZones(terrain[0], indiceZone1, indiceZone2);
                         } else {
-                            System.out.println("terrain de même type mais dans la même zone");
+                            
                         }
                     }
                 } else {
-                    System.out.println("- case autour non null mais pas bon terrain");
+                    
                 }
             } else {
-                System.out.println("- case autour null");
+                
             }
         }   //si n'a pas trouvé de zone a laquelle rattacher le terrain
         if(! terrainAutour){
-        	System.out.println("cree zone");
+        	
             creerZone(terrain, c);
         }
-        afficherGrilleZone();
+       
     }
     public void creerZone(int[] terrain, Coord c){
-        System.out.println("- creation d'une zone pour la coord"+c.getLigne()+c.getColonne());
+       
             //si ne rejoint pas une zone doit la creer
             int indice;
             switch (terrain[0]) {
