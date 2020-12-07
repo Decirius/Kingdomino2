@@ -23,7 +23,6 @@ public class IaPoseTuile extends IaAleatoire {
 
                 for (int numTerrain=0;numTerrain<2;numTerrain++) {		// Pour chaque terrain
 
-
                     int typeTerrain;
                     int[] terrainComplet;
                     int[] terrainComplet2;
