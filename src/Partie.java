@@ -103,7 +103,7 @@ public class Partie {
 				this.j2 = new IaChoixTuile(j1);
 				break;
 			case (5) :
-				this.j2 = new IaPoseTuile(j2)
+				this.j2 = new IaPoseTuile(j2);
 		}
         melangerPile();
         this.tirage = new Tuile[4];
