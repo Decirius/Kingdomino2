@@ -16,11 +16,13 @@ public class FenetreChoix extends JFrame implements ActionListener {
 	JRadioButton choixIaStandard;
 	JRadioButton choixIaCompetitive;
 	JRadioButton choixIaPoseTuile;
+	JRadioButton choixIaChoixTuile;
 	JRadioButton choix2Humain ;
 	JRadioButton choix2IaAleatoire ;
 	JRadioButton choix2IaStandard;
 	JRadioButton choix2IaCompetitive;
 	JRadioButton choix2IaPoseTuile;
+	JRadioButton choix2IaChoixTuile;
 	JCheckBox modeSansPopup;
 	
 	
@@ -76,6 +78,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		choixIaStandard = new JRadioButton ("IA Standard");
 		choixIaCompetitive = new JRadioButton ("IA Competitive");
 		choixIaPoseTuile = new JRadioButton("IA pose de tuile");
+		choixIaChoixTuile = new JRadioButton("IA choix tuile");
 		
 		choixHumain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,6 +87,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixHumain.setSelected(true);
 				choixIaCompetitive.setSelected(false);
 				choixIaPoseTuile.setSelected(false);
+				choixIaChoixTuile.setSelected(false);
 			}
 		});
 		choixIaAleatoire.addActionListener(new ActionListener() {
@@ -93,6 +97,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixIaAleatoire.setSelected(true);
 				choixIaCompetitive.setSelected(false);
 				choixIaPoseTuile.setSelected(false);
+				choixIaChoixTuile.setSelected(false);
 			}
 		});
 		choixIaStandard.addActionListener(new ActionListener() {
@@ -102,6 +107,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixIaStandard.setSelected(true);
 				choixIaCompetitive.setSelected(false);
 				choixIaPoseTuile.setSelected(false);
+				choixIaChoixTuile.setSelected(false);
 			}
 		});
 		choixIaCompetitive.addActionListener(new ActionListener() {
@@ -111,6 +117,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixIaStandard.setSelected(false);
 				choixIaCompetitive.setSelected(true);
 				choixIaPoseTuile.setSelected(false);
+        choixIaChoixTuile.setSelected(false);
 			}
 		});
 
@@ -121,16 +128,30 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixIaStandard.setSelected(false);
 				choixIaCompetitive.setSelected(false);
 				choixIaPoseTuile.setSelected(true);
+				choixIaChoixTuile.setSelected(false);
 			}
 		});
-		
-		
-		
+
+		choixIaChoixTuile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choixIaAleatoire.setSelected(false);
+				choixHumain.setSelected(false);
+				choixIaStandard.setSelected(false);
+				choixIaCompetitive.setSelected(false);
+				choixIaChoixTuile.setSelected(true);
+        choixIaPoseTuile.setSelected(false);
+			}
+		});
+
+
+
+
 		choix2Humain = new JRadioButton("Humain",true);
 		choix2IaAleatoire = new JRadioButton ("IA Aleatoire");
 		choix2IaStandard = new JRadioButton ("IA Standard");
 		choix2IaCompetitive = new JRadioButton ("IA Competitive");
 		choix2IaPoseTuile = new JRadioButton("IA pose de tuile");
+		choix2IaChoixTuile = new JRadioButton("IA choix tuile");
 		
 		choix2Humain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,6 +160,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2Humain.setSelected(true);
 				choix2IaCompetitive.setSelected(false);
 				choix2IaPoseTuile.setSelected(false);
+				choix2IaChoixTuile.setSelected(false);
 			}
 		});
 		choix2IaAleatoire.addActionListener(new ActionListener() {
@@ -148,6 +170,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2IaAleatoire.setSelected(true);
 				choix2IaCompetitive.setSelected(false);
 				choix2IaPoseTuile.setSelected(false);
+				choix2IaChoixTuile.setSelected(false);
 			}
 		});
 		choix2IaStandard.addActionListener(new ActionListener() {
@@ -157,6 +180,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2IaStandard.setSelected(true);
 				choix2IaCompetitive.setSelected(false);
 				choix2IaPoseTuile.setSelected(false);
+				choix2IaChoixTuile.setSelected(false);
 			}
 		});
 		choix2IaCompetitive.addActionListener(new ActionListener() {
@@ -166,6 +190,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2IaStandard.setSelected(false);
 				choix2IaCompetitive.setSelected(true);
 				choix2IaPoseTuile.setSelected(false);
+        choix2IaChoixTuile.setSelected(false);
 			}
 		});
 
@@ -176,10 +201,22 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2IaStandard.setSelected(false);
 				choix2IaCompetitive.setSelected(false);
 				choix2IaPoseTuile.setSelected(true);
+        choix2IaChoixTuile.setSelected(false);
 			}
 		});
-		
-		
+
+		choix2IaChoixTuile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choix2Humain.setSelected(false);
+				choix2IaAleatoire.setSelected(false);
+				choix2IaStandard.setSelected(false);
+				choix2IaCompetitive.setSelected(false);
+				choix2IaChoixTuile.setSelected(true);
+        choix2IaPoseTuile.setSelected(false);
+			}
+		});
+
+
 		modeSansPopup= new JCheckBox("Mode expert");
 		
 		boutonQuitter = new JButton("Quitter");
@@ -201,11 +238,13 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		panelCg.add(choixIaAleatoire);
 		panelCg.add(choixIaCompetitive);
 		panelCg.add(choixIaPoseTuile);
+		panelCg.add(choixIaChoixTuile);
 		panelCd.add(choix2Humain);
 		panelCd.add(choix2IaStandard);
 		panelCd.add(choix2IaAleatoire);
 		panelCd.add(choix2IaCompetitive);
 		panelCd.add(choix2IaPoseTuile);
+		panelCd.add(choix2IaChoixTuile);
 		panelBas.add(panelCg);
 		panelBas.add(panelCd);
 		choixMode.add(modeSansPopup);
@@ -241,9 +280,11 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				valJ1=2;
 			} else if (choixIaCompetitive.isSelected()) {
 				valJ1=3;
+      } else if (choixIaChoixTuile.isSelected()) {
+				valJ1=4;
 			} else if (choixIaPoseTuile.isSelected()) {
 				valJ1=5;
-			}
+			} 
 			
 			if (choix2Humain.isSelected()) {
 				valJ2=0;
@@ -253,10 +294,12 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				valJ2=2;
 			} else if (choix2IaCompetitive.isSelected()) {
 				valJ2=3;
+      } else if (choix2IaChoixTuile.isSelected()) {
+				valJ2=4;
 			} else if (choix2IaPoseTuile.isSelected()) {
 				valJ2=5;
-			}
-				
+			} 
+
 			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),valJ1,valJ2,!modeSansPopup.isSelected());
 			FenetreJeu jeu = new FenetreJeu(partie);
 			this.setVisible(false);

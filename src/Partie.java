@@ -80,9 +80,11 @@ public class Partie {
 			case (3) :
 				this.j1 = new IaCompetitive(j1);
 				break;
+      case (4) :
+				this.j1 = new IaChoixTuile(j1);
+				break;
 			case (5) :
 				this.j1 = new IaPoseTuile(j1);
-				break;
 		}
 		switch (typeJoueur2) {
 			case (0):
@@ -97,9 +99,11 @@ public class Partie {
 			case (3) :
 				this.j2 = new IaCompetitive(j2);
 				break;
-			case (5) :
-				this.j2 = new IaPoseTuile(j2);
+      case (4) :
+				this.j2 = new IaChoixTuile(j1);
 				break;
+			case (5) :
+				this.j2 = new IaPoseTuile(j2)
 		}
         melangerPile();
         this.tirage = new Tuile[4];
