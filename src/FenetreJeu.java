@@ -383,11 +383,11 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			int tuileChoisie ;
 			
 			if (idJ==1) {
- 				tuileChoisie = tempPartie.getJ1().reserver(tempPartie.getTirage(),tempPartie.getTempOrdre());
+ 				tuileChoisie = tempPartie.getJ1().reserver(tempPartie.getTirage(),tempPartie.getTempOrdre(),tempPartie.getJ2().getGrille());
  				
  				
 			} else {
-				tuileChoisie = tempPartie.getJ2().reserver(tempPartie.getTirage(),tempPartie.getTempOrdre());
+				tuileChoisie = tempPartie.getJ2().reserver(tempPartie.getTirage(),tempPartie.getTempOrdre(), tempPartie.getJ1().getGrille());
 			}
 			
 			this.tempPartie.setTempOrdreIndice(tuileChoisie, this.tempPartie.getTour());

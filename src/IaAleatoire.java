@@ -12,7 +12,7 @@ public class IaAleatoire extends Ia
 		    //si la tuile est deja� prise recommence
 		    //l'ordre n'est pas mis a� jour dans cette méthode
     
-    public int reserver(Tuile[] tirage,int[] tempOrdre) {
+    public int reserver(Tuile[] tirage,int[] tempOrdre, Grille grilleAdv) {
         //prend la partie entiere d'un nombre compris entre 0 et 3,99999 : entier entre 0 et 4
         int i = (int) (Math.random() * 4);
         

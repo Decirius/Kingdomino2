@@ -133,9 +133,9 @@ public class IaStandard extends Ia {
 	     	
 	}
 	
-	public int reserver(Tuile[] tirage,int[] tempOrdre) {
+	public int reserver(Tuile[] tirage,int[] tempOrdre, Grille grilleAdv) {
 		
-		// TODO : a modifier en fonction des tuiles déjà placées
+		// TODO : a modifier en fonction des tuiles dï¿½jï¿½ placï¿½es
 		int reserved=-1;
 		int max=0;
 		int[] scoreTuile= new int[4];
@@ -157,7 +157,7 @@ public class IaStandard extends Ia {
         }
         int indice=0;
         
-        while (reserved==-1) {					// si on a toujours pas réservé
+        while (reserved==-1) {					// si on a toujours pas rï¿½servï¿½
         	if (tempOrdre[indice]==0) {			// on prend la 1ere disponible	
         		reserved=indice;
         	}
