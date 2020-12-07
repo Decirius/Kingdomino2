@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IaPoseTuile extends IaAleatoire {
+
     public IaPoseTuile(String nom) {
         super(nom);
     }
+
     public boolean placerTuile() {
         // TODO On garde la selection au hasard pour l'instant
         int tuileSelected=-1;
