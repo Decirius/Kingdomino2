@@ -14,9 +14,11 @@ public class FenetreChoix extends JFrame implements ActionListener {
 	JRadioButton choixHumain;
 	JRadioButton choixIaAleatoire;
 	JRadioButton choixIaStandard;
+	JRadioButton choixIaCompetitive;
 	JRadioButton choix2Humain ;
 	JRadioButton choix2IaAleatoire ;
 	JRadioButton choix2IaStandard;
+	JRadioButton choix2IaCompetitive;
 	JCheckBox modeSansPopup;
 	
 	
@@ -70,12 +72,14 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		choixHumain = new JRadioButton ("Humain",true);
 		choixIaAleatoire = new JRadioButton ("IA Aleatoire");
 		choixIaStandard = new JRadioButton ("IA Standard");
+		choixIaCompetitive = new JRadioButton ("IA Competitive");
 		
 		choixHumain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				choixIaAleatoire.setSelected(false);
 				choixIaStandard.setSelected(false);
 				choixHumain.setSelected(true);
+				choixIaCompetitive.setSelected(false);
 			}
 		});
 		choixIaAleatoire.addActionListener(new ActionListener() {
@@ -83,6 +87,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixHumain.setSelected(false);
 				choixIaStandard.setSelected(false);
 				choixIaAleatoire.setSelected(true);
+				choixIaCompetitive.setSelected(false);
 			}
 		});
 		choixIaStandard.addActionListener(new ActionListener() {
@@ -90,6 +95,15 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choixIaAleatoire.setSelected(false);
 				choixHumain.setSelected(false);
 				choixIaStandard.setSelected(true);
+				choixIaCompetitive.setSelected(false);
+			}
+		});
+		choixIaCompetitive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choixIaAleatoire.setSelected(false);
+				choixHumain.setSelected(false);
+				choixIaStandard.setSelected(false);
+				choixIaCompetitive.setSelected(true);
 			}
 		});
 		
@@ -98,12 +112,14 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		choix2Humain = new JRadioButton("Humain",true);
 		choix2IaAleatoire = new JRadioButton ("IA Aleatoire");
 		choix2IaStandard = new JRadioButton ("IA Standard");
+		choix2IaCompetitive = new JRadioButton ("IA Competitive");
 		
 		choix2Humain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				choix2IaAleatoire.setSelected(false);
 				choix2IaStandard.setSelected(false);
 				choix2Humain.setSelected(true);
+				choix2IaCompetitive.setSelected(false);
 			}
 		});
 		choix2IaAleatoire.addActionListener(new ActionListener() {
@@ -111,6 +127,7 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2Humain.setSelected(false);
 				choix2IaStandard.setSelected(false);
 				choix2IaAleatoire.setSelected(true);
+				choix2IaCompetitive.setSelected(false);
 			}
 		});
 		choix2IaStandard.addActionListener(new ActionListener() {
@@ -118,8 +135,18 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				choix2Humain.setSelected(false);
 				choix2IaAleatoire.setSelected(false);
 				choix2IaStandard.setSelected(true);
+				choix2IaCompetitive.setSelected(false);
 			}
 		});
+		choix2IaCompetitive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choix2Humain.setSelected(false);
+				choix2IaAleatoire.setSelected(false);
+				choix2IaStandard.setSelected(false);
+				choix2IaCompetitive.setSelected(true);
+			}
+		});
+		
 		
 		modeSansPopup= new JCheckBox("Mode expert");
 		
@@ -140,9 +167,11 @@ public class FenetreChoix extends JFrame implements ActionListener {
 		panelCg.add(choixHumain);
 		panelCg.add(choixIaStandard);
 		panelCg.add(choixIaAleatoire);
+		panelCg.add(choixIaCompetitive);
 		panelCd.add(choix2Humain);
 		panelCd.add(choix2IaStandard);
 		panelCd.add(choix2IaAleatoire);
+		panelCd.add(choix2IaCompetitive);
 		panelBas.add(panelCg);
 		panelBas.add(panelCd);
 		choixMode.add(modeSansPopup);
@@ -176,6 +205,8 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				valJ1=1;
 			} else if (choixIaStandard.isSelected()) {
 				valJ1=2;
+			} else if (choixIaCompetitive.isSelected()) {
+				valJ1=3;
 			}
 			
 			if (choix2Humain.isSelected()) {
@@ -184,6 +215,8 @@ public class FenetreChoix extends JFrame implements ActionListener {
 				valJ2=1;
 			} else if (choix2IaStandard.isSelected()) {
 				valJ2=2;
+			} else if (choix2IaCompetitive.isSelected()) {
+				valJ2=3;
 			}
 				
 			Partie partie = new Partie(choixnom.getText(),choixnom2.getText(),valJ1,valJ2,!modeSansPopup.isSelected());

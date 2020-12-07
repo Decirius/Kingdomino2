@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class iaCompetitive extends IaStandard {
-    public iaCompetitive(String nom) {
+public class IaCompetitive extends IaStandard {
+    public IaCompetitive(String nom) {
         super(nom);
     }
 
