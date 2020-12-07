@@ -15,7 +15,6 @@ public class Tuile implements Comparable {
         
     }
 
-
     public int[] getTerrain1() {
         return this.terrain1;
     }
