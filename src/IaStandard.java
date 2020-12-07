@@ -56,23 +56,27 @@ public class IaStandard extends Ia {
 						placeTrouvee=true;
 						
 						for (int numPlace=0;numPlace<places.size();numPlace++) {	// On calcule le score de chaque place
+							
 							int scoreTuile2 = 0;
-							int tempScore1 =0;
-							tempScore1=scorePlacement(this.getReservation()[numTuile],terrainComplet,places.get(numPlace)[numTerrain]);
-							int tempScore2=0;
-							tempScore2=scorePlacement(this.getReservation()[numTuile],terrainComplet2,places.get(numPlace)[numTerrain2]);
+							
+							int tempScore1 =scorePlacement(this.getReservation()[numTuile],terrainComplet,places.get(numPlace)[0]);
+							
+							int tempScore2= scorePlacement(this.getReservation()[numTuile],terrainComplet2,places.get(numPlace)[1]);
+							
 							scoreTuile2=scoreTuile2+tempScore1+tempScore2;
+							
 							if (scoreTuile2>=max) {
+								
 								tuileSelected=numTuile;
 								terrainSelected=numTerrain;
 								max=scoreTuile2;
 								placeSelected=places.get(numPlace);
 								System.out.println("Meilleure place trouvee : "+scoreTuile2);
-							}
-							
+								
+							}						
 						}
 					}
-				}	
+				}
 			}
 		}
 		
@@ -123,7 +127,6 @@ public class IaStandard extends Ia {
 	                return true;
 				}
 			}
-			
 		}
 
 	    return false;   //si malgre tout un probleme renvoie false
@@ -179,12 +182,9 @@ public class IaStandard extends Ia {
 					
 					if (this.getGrille().getCase(coord)[0]==t.getTerrain1()[0]) {
 						scoreT1=scoreT1+1*(1+this.getGrille().getCase(coord)[1]);
-						
-						
 					}
 					if (this.getGrille().getCase(coord)[0]==t.getTerrain2()[0]) {
 						scoreT2=scoreT2+1*(1+this.getGrille().getCase(coord)[1]);
-						
 					}
 					
 				}
@@ -240,8 +240,8 @@ public class IaStandard extends Ia {
 	       						multiplicateur=(this.getMines().get(indice)[1])*(this.getMines().get(indice)[0]);
 	       						scoreAjout=scoreAjout+this.getMines().get(indice)[0]+multiplicateur;
 	       						break;
-		        				}
-       					}
+		        		}
+       				}
        			}
        		}
        	}	
