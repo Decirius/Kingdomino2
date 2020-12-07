@@ -70,26 +70,29 @@ public class IaCompetitive extends IaStandard {
     }
 
 
+
     public int scoreSelectionAdv(Tuile t, Grille g) {
         // Calcule d'un score de selection pour la tuile
         int scoreT1=0;							// On initialise un score pour chaque terrain
         int scoreT2=0;
+
         // Il prioritise les terrains de type qu'il a deja
         for (int i=0;i<7;i++) {
             for (int j=0;j<7;j++) {
                 Coord coord = new Coord(i,j);
-                if (g.getCase(coord)!=null) {
+                if (g.getCase(coord)!=null && !(coord.getLigne()==3 && coord.getColonne()==3)) {
+
                     if (g.getCase(coord)[0]==t.getTerrain1()[0]) {
-                        scoreT1+=1;
+                        scoreT1=scoreT1+1*(1+g.getCase(coord)[1]);
                     }
-                    scoreT1=scoreT1+(g.getCase(coord)[1]*5);
                     if (g.getCase(coord)[0]==t.getTerrain2()[0]) {
-                        scoreT2+=1;
+                        scoreT2=scoreT2+1*(1+g.getCase(coord)[1]);
                     }
-                    scoreT2=scoreT1+(g.getCase(coord)[1]*5);
                 }
             }
         }
+        scoreT1=scoreT1+scoreT1*t.getTerrain1()[1];
+        scoreT2=scoreT2+scoreT2*t.getTerrain2()[1];
 
         return (scoreT1+scoreT2);
     }
