@@ -3,6 +3,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class IaCompetitive extends IaStandard {
+
     public IaCompetitive(String nom) {
         super(nom);
     }
