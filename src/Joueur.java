@@ -335,7 +335,7 @@ public abstract class Joueur {
 
     public abstract boolean placerTuile();
 
-    public int reserver(Tuile[] tirage,int[] tempOrdre) {
+    public int reserver(Tuile[] tirage,int[] tempOrdre, Grille grilleAdv) {
     	return 0;
     }
     

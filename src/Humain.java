@@ -68,7 +68,7 @@ public class Humain extends Joueur {
         return false;
     }
     
-    public int reserver(Tuile[] tirage,int[] tempOrdre) {
+    public int reserver(Tuile[] tirage,int[] tempOrdre, Grille grilleAdv) {
     	return 0;
     }
 }
