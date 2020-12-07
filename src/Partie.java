@@ -100,7 +100,7 @@ public class Partie {
 				this.j2 = new IaCompetitive(j2);
 				break;
 			case (4) :
-				this.j2 = new IaChoixTuile(j1);
+				this.j2 = new IaChoixTuile(j2);
 				break;
 			case (5) :
 				this.j2 = new IaPoseTuile(j2);
