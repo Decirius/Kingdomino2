@@ -13,8 +13,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 
 
 	JPanel panel = new JPanel();
-	
-	JMenuItem sauvegarder;
+
 	JMenuItem quitter;
 	JMenuItem rules;
 	
@@ -43,7 +42,13 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		setVisible(true);			
 		
 		if (tempPartie.getModePopup()) {
-			JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Vous incarnez un Seigneur en quête de terres pour étendre son Royaume. Champs de blé, lacs, montagnes …. Il vous faut tout explorer pour repérer les meilleures parcelles. <br/>" +
+					"Mais d’autres Seigneurs convoitent les mêmes terres que vous. <br/>" +
+					"Connectez astucieusement vos dominos pour construire le royaume de 5x5 cases le plus prestigieux.<br/>" +
+					"L’ordre du tour de jeu est déterminé par la position des rois sur la ligne des dominos. Quand c'est à votre tour, cliquez sur la tuile que vous souhaitez prendre <br/>" +
+					" Au moment de placer vos tuile, cliquez sur le terrain que vous souhaitez placer, puis sur l'emplacement où vous voulez qu'il prenne <br/>" +
+					"cliquez ensuite sur l'emplacement où placer le deuxième terrain de la tuile <br/>" +
+					"si vous ne voulez pas placer une tuile sur votre grille, cliquez sur le bouton défausser et sur la tuile à faire disparaitre <br/></html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		debutTour();
@@ -247,20 +252,17 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	
 	private JMenuBar buildMenu() {
 		JMenuBar menu = new JMenuBar();
-		
-		sauvegarder = new JMenuItem ("Sauvegarder");
+
 		quitter = new JMenuItem ("Quitter");
-		rules = new JMenuItem ("R�gles");
+		rules = new JMenuItem ("Regles");
 		
 		JMenu menuFile = new JMenu("Fichier");
 		JMenu menuAide = new JMenu("Aide");
 
-		menuFile.add(sauvegarder);
 		menuFile.add(quitter);
 		
 		menuAide.add(rules);
-		
-		sauvegarder.addActionListener(this);
+
 		quitter.addActionListener(this);
 		rules.addActionListener(this);
 		
@@ -305,7 +307,13 @@ public class FenetreJeu extends JFrame implements ActionListener {
 			this.dispose();
 		}
 		if (e.getSource().equals(rules)) {
-			JOptionPane.showMessageDialog(null, "<html>Blabla regle blabla</html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Vous incarnez un Seigneur en quête de terres pour étendre son Royaume. Champs de blé, lacs, montagnes …. Il vous faut tout explorer pour repérer les meilleures parcelles. <br/>" +
+					"Mais d’autres Seigneurs convoitent les mêmes terres que vous. <br/>" +
+					"Connectez astucieusement vos dominos pour construire le royaume de 5x5 cases le plus prestigieux.<br/>" +
+					"L’ordre du tour de jeu est déterminé par la position des rois sur la ligne des dominos. Quand c'est à votre tour, cliquez sur la tuile que vous souhaitez prendre <br/>" +
+					" Au moment de placer vos tuile, cliquez sur le terrain que vous souhaitez placer, puis sur l'emplacement où vous voulez qu'il prenne <br/>" +
+					"cliquez ensuite sur l'emplacement où placer le deuxième terrain de la tuile <br/>" +
+					"si vous ne voulez pas placer une tuile sur votre grille, cliquez sur le bouton défausser et sur la tuile à faire disparaitre <br/></html>","Rappel de regles", JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (e.getSource().equals(defausse)) {
 			defausseActive=true;
@@ -372,9 +380,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 	}
 	
 	public void tourIa(int idJ) {
-		
-		
-		
+
 		switch (tempPartie.getPhase()) {
 		case 1:
 		case 2:
@@ -410,7 +416,7 @@ public class FenetreJeu extends JFrame implements ActionListener {
 		panel.removeAll();
 		setContentPane(buildContentPane());
 		if (tempPartie.getModePopup()) {
-			JOptionPane.showMessageDialog(null, "Fin tour ia","Fin ia",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Fin du tour de l'IA","Fin ia",JOptionPane.INFORMATION_MESSAGE);
 		}
 		finPhase();
 		

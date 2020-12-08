@@ -20,12 +20,12 @@ public class FenetreMain extends JFrame implements ActionListener {
 	
 	
 	JButton boutonNouveau = new JButton("Nouvelle Partie");
-	JButton boutonCharger = new JButton("Charger une Partie");	
+	JButton boutonCharger = new JButton("Statistiques (a venir)");
 	JButton boutonQuitter = new JButton("Quitter");
 	
 	public FenetreMain() {
 		
-		// Création de la fenetre
+		// Crï¿½ation de la fenetre
 		setTitle("Kingdomino");
 		setSize(500,690);
 		setLocationRelativeTo(null);
